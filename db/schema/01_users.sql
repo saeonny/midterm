@@ -1,5 +1,5 @@
 -- Drop and recreate Users table (Example)
--- npm run db:reset // reset db => run on terminal
+-- npm run db:reset => run on terminal
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS favorites CASCADE;
 DROP TABLE IF EXISTS messages CASCADE;
