@@ -16,12 +16,27 @@ CREATE TABLE users (
   password VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE items (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  thumbnail_photo_url VARCHAR(255) NOT NULL,
+  price INTEGER NOT NULL DEFAULT 0,
+  color VARCHAR(255) NOT NULL,
+  date_posted TIMESTAMP NOT NULL,
+  available BOOLEAN NOT NULL DEFAULT TRUE,
+  year INTEGER NOT NULL,
+  make VARCHAR(255) NOT NULL,
+  model VARCHAR(255) NOT NULL
+
+);
+
 CREATE TABLE favorites (
   id SERIAL PRIMARY KEY NOT NULL,
 
   item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE messages (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -30,22 +45,8 @@ CREATE TABLE messages (
   item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
 
   message VARCHAR(255) NOT NULL,
-  message_data_time TIMESTAMP NOT NULL,
+  message_data_time TIMESTAMP NOT NULL
 
-)
+);
 
-CREATE TABLE items (
-  id SERIAL PRIMARY KEY NOT NULL,
 
-  title VARCHAR(255) NOT NULL,
-  description TEXT NOT NULL,
-  thumbnail_photo_url VARCHAR(255) NOT NULL,
-  price INTEGER NOT NULL DEFAULT 0,
-  color VARCHAR(255) NOT NULL DEFAULT 'undefined',
-  date_posted TIMESTAMP NOT NULL,
-  available BOOLEAN NOT NULL DEFAULT TRUE,
-  year INTEGER NOT NULL,
-  make VARCHAR(255) NOT NULL,
-  model VARCHAR(255) NOT NULL,
-
-)
