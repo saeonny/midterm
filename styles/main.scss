@@ -14,3 +14,33 @@
     rgba(163, 208, 219, 1) 100%
   );
  }
+
+ .itemsPosted {
+   display:flex;
+   width: 80%;
+   flex-direction: row;
+   justify-content: space-between;
+   background-color: lightsteelblue
+ }
+
+
+div.price{
+  color:green;
+}
+div.right-col {
+  display:flex;
+  flex-direction: row;
+}
+
+.middle-info {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+div.details{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
