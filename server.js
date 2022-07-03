@@ -49,6 +49,10 @@ const favourties = require("./routes/favorites")
 app.use( "/home/favorites", favourties(db));
 
 
+////////HOME:LOGIN/////////////
+const login = require("./routes/login")
+app.use( "/home/login", login(db));
+
 
 
 // Home page
