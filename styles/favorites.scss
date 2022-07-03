@@ -1,0 +1,21 @@
+body{
+  margin-top: 5em;
+  width: 80%;
+  justify-content: center;
+}
+
+.favorite_container{
+
+  display: flex;
+  flex-direction: column;
+}
+.favorite_items{
+  display: flex;
+  flex-direction: row;
+  &__img{
+    height: 80%;
+    width: 30%;
+    object-fit: scale-down;
+
+  }
+}

@@ -3,7 +3,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    const user_id = 2;
+    const user_id = 2; ///////change this part to cookie parser req.session.user_id//////////
     const query =
     `SELECT items.*
      FROM users
@@ -14,7 +14,9 @@ module.exports = (db) => {
     db.query(query,[user_id])
       .then(data => {
         const items = data.rows;
-        res.render("favorites");
+        const vars = {data:items}
+        res.render("favorites",vars);
+
       })
       .catch(err => {
         res
@@ -24,7 +26,3 @@ module.exports = (db) => {
   });
   return router;
 };
-
-const creating_list = function(data_set) {
-
-}
