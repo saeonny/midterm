@@ -14,7 +14,9 @@ module.exports = (db) => {
     db.query(query,[user_id])
       .then(data => {
         const items = data.rows;
-        res.render("favorites",{data:items});
+        const vars = {data:items}
+        res.render("favorites",vars);
+
       })
       .catch(err => {
         res
@@ -24,7 +26,3 @@ module.exports = (db) => {
   });
   return router;
 };
-
-const creating_list = function(data_set) {
-
-}
