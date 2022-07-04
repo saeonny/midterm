@@ -33,14 +33,22 @@ module.exports = (db) => {
   });
   router.post("/delete/:item", (req, res) =>{
     const user_id = 2; ///////change this part to cookie parser req.session.user_id//////////
+    const item_id = req.body.item.id; ///// this needs to be changed//////
     const query =
     `SELECT items.*
      FROM users
      JOIN favorites as fav ON users.id = fav.user_id
      JOIN items ON fav.item_id = items.id
      WHERE user_id = $1;`
-
-
+    db.query(query, [user_id, item_id])
+      .then(data => {
+        res.redirect("/")
+    })
+      .catch(err => {
+        res
+        .status(500)
+        .json({error: err.message})
+    });
   })
   return router;
 };
@@ -48,7 +56,12 @@ module.exports = (db) => {
 const dataToHtml = function(data) {
   let html = ``
   for (let item of data){
-    html += `${item.id}, ${item.title}`
-
+    html += `<h1>${item.id}, ${item.title}, $${item.price} <button METHOD = POST ACTION = '/delete/${item.id}'> delete </button></h1>`
+    if (!user_id) {
+      html += `<p>Please log in or register to favourite items<p>`
+    }
+    if (user.name ==='Admin' || user.email === 'admin@gmail.com') {
+      html += `<h1>${item.id}, ${item.title}, $${item.price} <button METHOD = POST ACTION = '/delete/${item.id}'> delete </button><button METHOD = POST type = "submit">sold out</button></h1>`
+    }
   }
 }

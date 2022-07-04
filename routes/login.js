@@ -9,7 +9,7 @@ const router  = express.Router();
  * @return {Promise<{}>} A promise to the user.
  */
  const getUserWithEmail = function(email) {
-  return pool.query(
+  return db.query(
     `SELECT *
    FROM users
    WHERE email = $1`, [email])
@@ -29,7 +29,7 @@ exports.getUserWithEmail = getUserWithEmail;
  * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithId = function(id) {
-  return pool.query(
+  return db.query(
     `SELECT *
      FROM users
      WHERE id = $1`, [id])
@@ -49,7 +49,7 @@ exports.getUserWithId = getUserWithId;
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser = function(user) {
-  return pool.query(`INSERT INTO users (name, email, password)
+  return db.query(`INSERT INTO users (name, email, password)
   VALUES ($1, $2, $3)
   RETURNING *;
   `, [user.name, user.email, user.password])
