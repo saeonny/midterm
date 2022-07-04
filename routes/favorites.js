@@ -48,7 +48,7 @@ module.exports = (db) => {
 const dataToHtml = function(data) {
   let html = ``
   for (let item of data){
-    html += `${item.id}, ${item.title}`
+    html += `<h1>${item.id}, ${item.title}</h1>`
 
   }
 }
