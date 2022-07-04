@@ -1,119 +1,71 @@
 const express = require('express');
 const router  = express.Router();
-
-/// Users
-
-/**
- * Get a single user from the database given their email.
- * @param {String} email The email of the user.
- * @return {Promise<{}>} A promise to the user.
- */
- const getUserWithEmail = function(email) {
-  return db.query(
-    `SELECT *
-   FROM users
-   WHERE email = $1`, [email])
-    .then(res => {
-      const users = res.rows;
-      if (users.length === 0) {
-        return null;
-      } else {
-        return res.rows[0];
-      }
-    });
-};
-exports.getUserWithEmail = getUserWithEmail;
-/**
- * Get a single user from the database given their id.
- * @param {string} id The id of the user.
- * @return {Promise<{}>} A promise to the user.
- */
-const getUserWithId = function(id) {
-  return db.query(
-    `SELECT *
-     FROM users
-     WHERE id = $1`, [id])
-    .then(res => {
-      const users = res.rows;
-      if (users.length === 0) {
-        return null;
-      } else {
-        return res.rows[0];
-      }
-    });
-};
-exports.getUserWithId = getUserWithId;
-/**
- * Add a new user to the database.
- * @param {{name: string, password: string, email: string}} user
- * @return {Promise<{}>} A promise to the user.
- */
-const addUser = function(user) {
-  return db.query(`INSERT INTO users (name, email, password)
-  VALUES ($1, $2, $3)
-  RETURNING *;
-  `, [user.name, user.email, user.password])
-    .then(res => {
-      return res.rows[0];
-    });
-};
-exports.addUser = addUser;
-
-
+const bcrypt = require('bcryptjs');
 
 
 
 module.exports = function(db) {
 
-  // Create a new user
+
+
+  router.get('/',(req,res) => {
+    console.log(req.session.user_id)
+    res.render('login')
+  })
+
+  //LOGIN TRY
   router.post('/', (req, res) => {
-    const user = req.body;
-    user.password = bcrypt.hashSync(user.password, 12);
-    db.addUser(user)
-    .then(user => {
-      if (!user) {
-        res.send({error: "error"});
-        return;
-      }
-      req.session.userId = user.id;
-      res.send("🤗");
-    })
-    .catch(e => res.send(e));
-  });
+    const givenEmail = req.body.email;
+    const givenPass = req.body.password;
 
-  /**
-   * Check if a user exists with a given username and password
-   * @param {String} email
-   * @param {String} password encrypted
-   */
-  const login =  function(email, password) {
-    return db.getUserWithEmail(email)
-    .then(user => {
-      if (bcrypt.compareSync(password, user.password)) {
-        return user;
-      }
-      return null;
-    });
-  }
-  exports.login = login;
+    const getUserWithEmail= function(email) {
 
-  router.post('/login', (req, res) => {
-    const {email, password} = req.body;
-    login(email, password)
-      .then(user => {
-        if (!user) {
-          res.send({error: "error"});
-          return;
+      const query = `
+      SELECT *
+      FROM users
+      WHERE email = $1;
+      `
+      return  db.query(query,[email])
+      .then((data) => {
+        if(data.rows.length === 0 ) {
+          return null
         }
-        req.session.userId = user.id;
-        res.send({user: {name: user.name, email: user.email, id: user.id}});
+        else {
+          //return user => user.password, user.id, user.email etc
+          return data.rows[0]
+        }
       })
-      .catch(e => res.send(e));
-  });
+      .catch((err) => {
+        console.log(err.message);
+      });
+    }
 
-  router.post('/logout', (req, res) => {
-    req.session.userId = null;
-    res.send({});
-  });
+
+    return getUserWithEmail(givenEmail)
+    .then((user) => {
+      if(user === null) {
+        return res.send('failed to login email doest not exists')
+      }
+      else {
+        if (bcrypt.compareSync(givenPass,user.password)){
+          req.session.user_id = user.id;
+          return res.send('successfully login')
+        }
+        else {
+          return res.send('password is not correct')
+        }
+      }
+    })
+  })
+
+
+
+
+
+  // if given email is exists in our database it returns user otherwise return null
+
+
+
   return router;
+
 }
