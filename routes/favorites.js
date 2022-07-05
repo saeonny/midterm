@@ -4,8 +4,22 @@ const router  = express.Router();
 module.exports = (db) => {
 
 
-  router.get("/", (req, res) => {
-    const user_id = 2; ///////change this part to cookie parser req.session.user_id//////////
+  router.get("/favorites", (req, res) => {
+    ////////////////////////if user is not logined///////////////////////////////////////////
+    if(!req.session.user_id|| req.session.user_id === 1){
+      res.redirect("/home/login")
+    }
+
+
+
+    const templateVar = {user_id:null, user_name:null , data:null}
+    templateVar.user_id = req.session.user_id;
+    templateVar.user_name = req.session.user_name;
+    console.log('favorties session',req.session.user_id)
+
+
+
+    const user_id = templateVar.user_id;
     const query =
     `SELECT items.*
      FROM users
@@ -16,11 +30,10 @@ module.exports = (db) => {
     db.query(query,[user_id])
       .then(data => {
         const items = data.rows;
-
-        const vars = {data:`
+        templateVar.data = `
         <h1>${items[0].id}, ${items[0].title}, $${items[0].price} <button METHOD = POST ACTION = '/delete/${items[0].id}'> delete </button></h1>
-        `}
-        res.render("favorites",vars);
+        `
+        res.render("favorites",templateVar);
 
 
       })

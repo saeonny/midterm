@@ -7,20 +7,31 @@
     <div class="collapse navbar-collapse" style="justify-content: space-between" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link" href="/home/favorites">My CARS</a>
-        <a class="nav-item nav-link" href="#">Create New URL</a>
+        <a class="nav-item nav-link" href="#">Messages</a>
       </div>
     </div>
 
 
+    <% if(user_id) { %>
+
+      <div class="form-group mx-sm-3 mb-2">
+        <button type="submit" class="btn btn-outline-light"> <%=user_name%> </button>
+      </div>
+      <form class="nav justify-content-end" action = "/home/logout" method ="POST">
+      <button type="submit" class="btn btn-outline-light">Logout</button>
+    </form>
+  <% } %>
 
 
-    <a href="home/login">
+
+    <% if(!user_id) { %>
+    <a href="/home/login">
       <button type="submit" class="btn btn-outline-light">Login</button>
     </a>
-    <a href = "home/register">
+    <a href = "/home/register">
       <button type="submit" class="btn btn-outline-light">Register</button>
     </a>
-
+    <% } %>
 
   </nav>
 </header>

@@ -9,19 +9,23 @@ module.exports = function(db) {
 
 
 
-  router.get('/',(req,res) => {
+  router.get('/login',(req,res) => {
     //check with cookie-parser that user_id exists or not
     // if exists => redirect to homepage
-    if(req.session.user_id){
-      res.redirect("/")
-    }
-    console.log("cookie", req.session.user_id)
 
-    res.render('login')
+   const templateVar = {user_id : null , user_email:null}
+    if(req.session.user_id){
+      res.redirect("/favorites")
+    }
+
+    else {
+
+    res.render('login',templateVar)
+  }
   })
 
   //LOGIN TRY
-  router.post('/', (req, res) => {
+  router.post('/login', (req, res) => {
     const givenEmail = req.body.email;
     const givenPass = req.body.password;
 
@@ -61,7 +65,8 @@ module.exports = function(db) {
         // 2. redirect to homepage
         if (bcrypt.compareSync(givenPass,user.password)){
           req.session.user_id = user.id;
-          return res.send('successfully login')
+          req.session.user_name = user.name;
+          return res.redirect("/home/favorites")
         }
         // given Email is exists but password is not correct
         // 1. add alert to the login page with "password is not correct"
@@ -74,8 +79,9 @@ module.exports = function(db) {
 
   router.post('/logout',(req, res)=> {
     req.session.user_id = null;
+    req.session.user_name = null;
     console.log('cookie after logout',req.session.user_id)
-    res.redirect("/");
+    res.redirect("/home/login");
   })
 
 

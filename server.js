@@ -57,12 +57,12 @@ app.use("/api/widgets", widgetsRoutes(db));
 
 ////////HOME:FAVOURITES/////////////
 const favourties = require("./routes/favorites")
-app.use( "/home/favorites", favourties(db));
+app.use( "/home", favourties(db));
 
 
 ////////HOME:LOGIN/////////////
 const login = require("./routes/login")
-app.use( "/home/login", login(db));
+app.use( "/home", login(db));
 
 ////////HOME:REGISTER///////////
 const register = require("./routes/register")
