@@ -69,8 +69,12 @@ const register = require("./routes/register")
 app.use("/home/register",register(login))
 
 ////////HOME:ITEM/////////////
-const item = require("./routes/detailed_item")
-app.use( "/:item", items(db));
+// const item = require("./routes/detailed_item")
+// app.use( "/:item", items(db));
+
+////////HOME:NEW ITEM/////////////
+// const item = require("./routes/post_item")
+// app.use( "/postitem", postitem(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
