@@ -62,18 +62,40 @@ module.exports = (db) => {
         .json({error: err.message})
     });
   })
+
+  router.post("/details/:item", (req, res) =>{
+    // res.send(`${req.params.item} redirect `)
+    const item_id = req.params.item
+    res.redirect(`/home/item/${item_id}`)
+  })
+
+
+
+
   return router;
 };
 
+
+
 const dataToHtml = function(data) {
-  let html = ``
+  let html = `<div class = "favorite_container">`
+  //this html components interact with favorites.scss
   for (let item of data){
       html += `
-      <h1>${item.id}, ${item.title}, $${item.price}
+      <card class = "favorite_card">
+      ${item.id}, ${item.title}, $${item.price}
+      <div class = buttons>
       <form method = "POST" action = "/home/delete/${item.id}">
       <button> delete </button>
       </form>
-      </h1>`
+      <form method = "POST" action = "/home/item/${item.id}">
+      <button> details </button>
+      </form>
+      </div>
+      </card>
+      `
+
     }
+    html += "</div>"
     return html
 }

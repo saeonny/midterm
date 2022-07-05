@@ -69,15 +69,14 @@ const register = require("./routes/register")
 app.use("/home",register(db))
 
 ////////HOME:ITEM/////////////
-// const item = require("./routes/detailed_item")
-
-// app.use( "/:item", items(db));
+const item = require("./routes/detailed_item")
+app.use( "/home/item", item(db));
 
 ////////HOME:NEW ITEM/////////////
 // const item = require("./routes/post_item")
 // app.use( "/postitem", postitem(db));
 
-// app.use( "/home", item(db));
+
 
 
 // Home page

@@ -11,6 +11,9 @@ body{
 
   display: flex;
   flex-direction: column;
+  font-size: 2em;
+  row-gap: 1em;
+
 }
 .favorite_items{
   display: flex;
@@ -21,4 +24,14 @@ body{
     object-fit: scale-down;
 
   }
+}
+.favorite_card {
+  display: flex;
+  flex-direction: row;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+
 }
