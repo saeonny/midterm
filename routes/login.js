@@ -1,6 +1,7 @@
 const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcryptjs');
+const { redirect } = require('express/lib/response');
 
 
 
@@ -9,7 +10,13 @@ module.exports = function(db) {
 
 
   router.get('/',(req,res) => {
-    console.log(req.session.user_id)
+    //check with cookie-parser that user_id exists or not
+    // if exists => redirect to homepage
+    if(req.session.user_id){
+      res.redirect("/")
+    }
+    console.log("cookie", req.session.user_id)
+
     res.render('login')
   })
 
@@ -40,23 +47,37 @@ module.exports = function(db) {
       });
     }
 
-
     return getUserWithEmail(givenEmail)
     .then((user) => {
+      // if given Email does not exists
+      // 1. add alert to the login page with "email does not exists"
+      // 2. add alert to the login page with "if you are not registered => do register (button that direct to register page)
       if(user === null) {
         return res.send('failed to login email doest not exists')
       }
       else {
+        // if givenEmail and givenPass is match => successfully log in
+        // 1. req.session.user_id = user.id;
+        // 2. redirect to homepage
         if (bcrypt.compareSync(givenPass,user.password)){
           req.session.user_id = user.id;
           return res.send('successfully login')
         }
+        // given Email is exists but password is not correct
+        // 1. add alert to the login page with "password is not correct"
         else {
           return res.send('password is not correct')
         }
       }
     })
   })
+
+  router.post('/logout',(req, res)=> {
+    req.session.user_id = null;
+    console.log('cookie after logout',req.session.user_id)
+    res.redirect("/");
+  })
+
 
 
 

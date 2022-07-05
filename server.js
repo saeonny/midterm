@@ -64,6 +64,9 @@ app.use( "/home/favorites", favourties(db));
 const login = require("./routes/login")
 app.use( "/home/login", login(db));
 
+////////HOME:REGISTER///////////
+const register = require("./routes/register")
+app.use("/home/register",register(login))
 
 
 // Home page
