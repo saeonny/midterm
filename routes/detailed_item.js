@@ -16,8 +16,8 @@ module.exports = (db) => {
     WHERE id = $1
     `
     db.query(query,[item_id])
-    .then((data)=> {
-      templateVar.data = JSON.stringify(data.rows[0])
+    .then((result)=> {
+      templateVar.data = JSON.stringify(result.rows[0])
       templateVar.data += "<button>contact</button>"
       templateVar.data += "<button>add to favorite</button>"
       //change this  to data with html, JSON is for just checking the item is correctly passed to the page
