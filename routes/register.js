@@ -24,7 +24,7 @@ module.exports = (db) => {
 
     /// check Name,Password is only made with spaces
     if (givenName.trim().length === 0 || givenPass.trim().length === 0 || givenPhone.trim().length === 0) {
-      res.send("givenName or GivenPass cant be empty try again")
+      return res.send("givenName or GivenPass cant be empty try again")
     }
 
     // check email is registered or not
@@ -51,11 +51,12 @@ module.exports = (db) => {
     RETURNING *;
     `
 
-    return db.query(query1,[givenName,givenEmail,givenPhone,hashedPass])
+    db.query(query1,[givenName,givenEmail,givenPhone,hashedPass])
     .then((data)=>{
-      req.session.user_id = data.rows.id
-      req.session.user_name = data.rows.name;
-      res.redirect("/home/favorites")
+      req.session.user_id = data.rows[0].id
+      req.session.user_name = data.rows[0].name
+      return res.redirect("/home/favorites");
+
 
     })
 

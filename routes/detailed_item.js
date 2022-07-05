@@ -2,8 +2,6 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-
-
   router.get("/:item", (req, res) => {
     const query =
     `SELECT *
