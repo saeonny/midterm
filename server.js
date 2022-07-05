@@ -64,17 +64,21 @@ app.use( "/home", favourties(db));
 const login = require("./routes/login")
 app.use( "/home", login(db));
 
-////////HOME:REGISTER///////////
+////////HOME:REGISTER///////////////
 const register = require("./routes/register")
-app.use("/home/register",register(login))
+app.use("/home",register(db))
 
 ////////HOME:ITEM/////////////
 // const item = require("./routes/detailed_item")
+<<<<<<< HEAD
 // app.use( "/:item", items(db));
 
 ////////HOME:NEW ITEM/////////////
 // const item = require("./routes/post_item")
 // app.use( "/postitem", postitem(db));
+=======
+// app.use( "/home", item(db));
+>>>>>>> d45ac7608597bd2bf4fcdc0ea2a458860ccf077a
 
 // Home page
 // Warning: avoid creating more routes in this file!

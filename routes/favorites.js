@@ -7,7 +7,7 @@ module.exports = (db) => {
   router.get("/favorites", (req, res) => {
     ////////////////////////if user is not logined///////////////////////////////////////////
     if(!req.session.user_id|| req.session.user_id === 1){
-      res.redirect("/home/login")
+      return res.redirect("/home/login")
     }
 
 
@@ -29,11 +29,12 @@ module.exports = (db) => {
     db.query(query,[user_id])
     .then(data => {
         if(data.rows.length === 0) {
-          res.redirect("/");
+          templateVar.data = "<h3>nothings yet...</h3>"
+          return res.render("favorites",templateVar);
         }
         const items = data.rows;
         templateVar.data = dataToHtml(items)
-        res.render("favorites",templateVar);
+        return res.render("favorites",templateVar);
       })
       .catch(err => {
         res

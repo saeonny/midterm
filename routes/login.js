@@ -15,7 +15,7 @@ module.exports = function(db) {
 
    const templateVar = {user_id : null , user_email:null}
     if(req.session.user_id){
-      res.redirect("/favorites")
+      res.redirect("/home/favorites")
     }
 
     else {
