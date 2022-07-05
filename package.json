@@ -1,12 +1,12 @@
 {
   "name": "node-skeleton",
   "version": "1.0.0",
-  "description": "",
+  "description": "LHL Node Skeleton =========",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "local": "./node_modules/.bin/nodemon -L --ignore public/",
+    "local": "nodemon -L --ignore public/",
     "db:reset": "node bin/resetdb.js"
   },
   "author": "Lighthouse Labs",
@@ -26,5 +26,20 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.10"
-  }
+  },
+  "bin": {
+    "node-skeleton": "resetdb.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saeonny/midterm.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/saeonny/midterm/issues"
+  },
+  "homepage": "https://github.com/saeonny/midterm#readme"
 }
