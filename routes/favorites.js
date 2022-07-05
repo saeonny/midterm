@@ -45,16 +45,16 @@ module.exports = (db) => {
   });
   router.post("/delete/:item", (req, res) =>{
     const user_id = req.session.user_id;
-    const item_id = req.body.item.id;
+    const item_id = req.params.item;
     const query =
     `DELETE
-     FROM favourites
+     FROM favorites
      WHERE user_id = $1
      AND item_id = $2
      RETURNING *;`
     db.query(query, [user_id, item_id])
       .then(data => {
-        res.redirect("/")
+        res.redirect("/home/favorites")
     })
       .catch(err => {
         res
@@ -68,7 +68,12 @@ module.exports = (db) => {
 const dataToHtml = function(data) {
   let html = ``
   for (let item of data){
-      html += `<h1>${item.id}, ${item.title}, $${item.price} <button METHOD = POST ACTION = '/delete/${item.id}'> delete </button></h1>`
+      html += `
+      <h1>${item.id}, ${item.title}, $${item.price}
+      <form method = "POST" action = "/home/delete/${item.id}">
+      <button> delete </button>
+      </form>
+      </h1>`
     }
     return html
 }
