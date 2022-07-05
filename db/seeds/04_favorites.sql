@@ -1,6 +1,7 @@
 -- Widgets table seeds here (Example)
 INSERT INTO favorites (item_id,user_id)
- VALUES (1,2),
+ VALUES
+ (1,2),
  (2,2),
  (3,2),
  (4,2),

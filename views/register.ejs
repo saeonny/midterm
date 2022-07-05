@@ -18,13 +18,18 @@
 
     <main style="margin: 1em;">
       <h3>Create Account</h3>
-      <form class="form justify-content-center" action="/register" method="POST">
+      <form class="form justify-content-center" action="/home/register" method="POST">
         <div class="form-group mb-2">
           <label for="email" style="margin-top: 1em;">Enter an email:</label>
-          <input class="form-control" type="email" name="email" placeholder="Enter email" style="width: 300px;">
+          <input class="form-control" type="email" name="email" placeholder="email@mail.com" style="width: 300px;">
           <label for="password" style="margin-top: 1em;">Enter a password:</label>
           <input class="form-control" type="password" name="password" placeholder="Password" style="width: 300px;">
+          <label for="email" style="margin-top: 1em;">Enter an user name:</label>
+          <input class="form-control" type="name" name="name" placeholder="Chris Evan" style="width: 300px;">
+          <label for="phone" style="margin-top: 1em;">Enter an phone number:</label>
+          <input class="form-control" type="name" name="phone" placeholder="xxx-xxx-xxx" style="width: 300px;">
           <button type="submit" class="btn btn-primary" style="margin-top: 1em;">Register</button>
+
         </div>
       </form>
     </main>
