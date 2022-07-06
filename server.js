@@ -73,8 +73,8 @@ const item = require("./routes/detailed_item")
 app.use( "/home/item", item(db));
 
 ////////HOME:NEW ITEM/////////////
-// const item = require("./routes/post_item")
-// app.use( "/postitem", postitem(db));
+const postitem = require("./routes/post_item")
+app.use( "/home/", postitem(db));
 
 
 const homepage_item = require("./routes/item");
@@ -83,9 +83,19 @@ app.use( "/", homepage_item(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+
 // app.get("/", (req, res) => {
 //   res.render("index",{user_id:null,user_name:null});
 // });
+
+app.get("/", (req, res) => {
+  const templateVar = {user_id:null,user_name:null}
+  if(req.session.user_id){
+    templateVar.user_id = req.session.user_id
+    templateVar.user_name = req.session.user_name
+  }
+  res.render("index",templateVar);
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

@@ -66,7 +66,7 @@ module.exports = function(db) {
         if (bcrypt.compareSync(givenPass,user.password)){
           req.session.user_id = user.id;
           req.session.user_name = user.name;
-          return res.redirect("/home/favorites")
+          return res.redirect("/")
         }
         // given Email is exists but password is not correct
         // 1. add alert to the login page with "password is not correct"
