@@ -89,10 +89,10 @@ const dataToHtml = function(data) {
       </form>
       <div class = buttons>
       <form method = "POST" action = "/home/delete/${item.id}">
-      <button class="buttondelete" type="button"> delete </button>
+      <button class="buttondelete"> delete </button>
       </form>
       <form method = "POST" action = "/home/details/${item.id}">
-      <button class="buttondetails"type="button"> details </button>
+      <button class="buttondetails"> details </button>
       </form>
       </div>
       </card>
