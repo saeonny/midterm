@@ -13,13 +13,16 @@
 
 
     <% if(user_id) { %>
+      <div class="nav justify-content-end">
 
-      <div class="form-group mx-sm-3 mb-2">
+      <% if(user_id === 1) { %>
+        <button type="submit" class="btn btn-outline-light"> Add New Post </button>
+        <% } %>
         <button type="submit" class="btn btn-outline-light"> <%=user_name%> </button>
-      </div>
       <form class="nav justify-content-end" action = "/home/logout" method ="POST">
       <button type="submit" class="btn btn-outline-light">Logout</button>
     </form>
+  </div>
   <% } %>
 
 

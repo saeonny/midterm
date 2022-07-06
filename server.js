@@ -84,7 +84,12 @@ app.use( "/home/item", item(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index",{user_id:null,user_name:null});
+  const templateVar = {user_id:null,user_name:null}
+  if(req.session.user_id){
+    templateVar.user_id = req.session.user_id
+    templateVar.user_name = req.session.user_name
+  }
+  res.render("index",templateVar);
 });
 
 app.listen(PORT, () => {
