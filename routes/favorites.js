@@ -83,13 +83,16 @@ const dataToHtml = function(data) {
   for (let item of data){
       html += `
       <card class = "favorite_card">
-      ${item.id}, ${item.title}, $${item.price}
+      <img style="float:left" class="photo" src=${item.thumbnail_photo_url}>
+      <form style="float:right" class="words">
+      <div>${item.id}</div> <div>${item.title}</div> <div>$${item.price}</div>
+      </form>
       <div class = buttons>
       <form method = "POST" action = "/home/delete/${item.id}">
-      <button> delete </button>
+      <button class="buttondelete" type="button"> delete </button>
       </form>
       <form method = "POST" action = "/home/details/${item.id}">
-      <button> details </button>
+      <button class="buttondetails"type="button"> details </button>
       </form>
       </div>
       </card>
