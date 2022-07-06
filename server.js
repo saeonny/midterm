@@ -77,7 +77,7 @@ app.use( "/home/item", item(db));
 
 ////////HOME:NEW ITEM/////////////
 const postitem = require("./routes/post_item")
-app.use( "/home/", postitem(db));
+app.use( "/home/postitem", postitem(db));
 
 
 const homepage_item = require("./routes/item");

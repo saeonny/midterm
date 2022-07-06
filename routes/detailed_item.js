@@ -112,29 +112,29 @@ module.exports = (db) => {
       });
   })
 
-  // router.post("/home/messages/:item", (req, res) =>{
-  //   if(!req.session.user_id|| req.session.user_id === 1){
-  //     return res.redirect("/home/login")
-  //   }
+      // router.post("/home/messages/:item", (req, res) =>{
+      //   if(!req.session.user_id|| req.session.user_id === 1){
+      //     return res.redirect("/home/login")
+      //   }
 
-  //   const user_id = req.session.user_id;
-  //   const item_id = req.params.item;
-  //   const query =
-  //   `INSERT
-  //    FROM messages
-  //    WHERE user_id = $1
-  //    AND item_id = $2
-  //    RETURNING *;`
-  //   db.query(query, [user_id, item_id])
-  //     .then(data => {
-  //       res.redirect("/home/messages/:item")
-  //   })
-  //     .catch(err => {
-  //       res
-  //       .status(500)
-  //       .json({error: err.message})
-  //   });
-  // })
+      //   const user_id = req.session.user_id;
+      //   const item_id = req.params.item;
+      //   const query =
+      //   `INSERT
+      //    FROM messages
+      //    WHERE user_id = $1
+      //    AND item_id = $2
+      //    RETURNING *;`
+      //   db.query(query, [user_id, item_id])
+      //     .then(data => {
+      //       res.redirect("/home/messages/:item")
+      //   })
+      //     .catch(err => {
+      //       res
+      //       .status(500)
+      //       .json({error: err.message})
+      //   });
+      // })
 
   const toHtml = function (data){
     const item = data;
