@@ -17,12 +17,43 @@
 
  .itemsPosted {
    display:flex;
+
    width: 80%;
-   flex-direction: row;
+   flex-direction: column;
    justify-content: space-between;
-   background-color: lightsteelblue
+   background-color: lightsteelblue;
+   margin-bottom: 50px;
  }
 
+ div.itemsPosted:hover {
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.1s;
+}
+
+div.groupItem-one {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+img.photo {
+  margin-right: 70px;
+}
+div.car-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+div.attribute-color {
+  margin-right: 250px;
+}
+
+ div.left-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+ }
 
 div.price{
   color:green;
@@ -44,3 +75,21 @@ div.details{
   flex-direction: column;
   justify-content: space-between;
 }
+
+.favourite-container{
+  display:inline-block;
+  position:relative;
+}
+
+.favourite-container span{
+    position: absolute;
+    top:1em;
+    right:4em;
+    border-radius:1.5em;
+    color:white;
+    padding:1em 1.5em;
+  }
+
+  #icons i:hover {
+    color: rgb(182, 182, 0);
+  }
