@@ -24,34 +24,34 @@ module.exports = (db) => {
       const favQuery = `
       SELECT *
       FROM favorites
-      WHERE used_id = $1 AND item_id = $2
+      WHERE user_id = $1 AND item_id = $2
       `
 
 
 
-      return db.query(favQuery, [req.session.user_id, item_id])
-        .then((result) => {
+      return db.query(favQuery, [user_id, item_id])
+        .then((result1) => {
           //this item is not liked by user so dont need delete button
-          if (result.rows.length === 0) {
-            return db.query(itemQuery,item_id)
+          if (result1.rows.length === 0) {
+            return db.query(itemQuery,[item_id])
             .then((result)=> {
               const item = result.rows[0]
               let html = toHtml(item);
               html += `
-              <form method = "POST" action = "/home/favourites/${item.id}">
+              <form method = "POST" action = "/home/item/favourites/${item.id}">
               <button class="favbutton"> add to favourites </button>
               </form></div></div>`
               templateVar.data = html;
               return res.render('detailed_item',templateVar)
             })
           }
-          if (result.rows.length !== 0) {
-            return db.query(itemQuery,item_id)
+          if (result1.rows.length !== 0) {
+            return db.query(itemQuery,[item_id])
             .then((result)=> {
               const item = result.rows[0]
               let html = toHtml(item);
               html += `
-              <form method = "POST" action = "/home/favourites/${item.id}">
+              <form method = "POST" action = "/home/item/remove/${item.id}">
               <button class="favbutton"> remove from favourites </button>
               </form></div> </div>
               `
@@ -71,7 +71,7 @@ module.exports = (db) => {
       .then((data) => {
         const item = data.rows[0];
         let html = toHtml(item);
-        html += `<form method = "POST" action = "/home/favourites/${item.id}">
+        html += `<form method = "POST" action = "/home/item/favourites/${item.id}">
         <button class="favbutton"> add to favourites </button>
         </form>
       </div>
@@ -88,22 +88,43 @@ module.exports = (db) => {
   //post for contact
   //post for adding to favorites // if not logined user => redirect to login
 
-  router.post("/home/favourites/:item", (req, res) => {
+  router.post("/favourites/:item", (req, res) => {
+
+
+    const user_id = req.session.user_id;
+    const item_id = req.params.item;
+    const query =
+      `INSERT INTO favorites (item_id,user_id)
+      VALUES ($1,$2)
+     RETURNING *;`;
+    db.query(query, [item_id, user_id])
+      .then(data => {
+        res.redirect(`/home/item/${item_id}`);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  })
+
+  router.post("/remove/:item", (req, res) => {
     if (!req.session.user_id || req.session.user_id === 1) {
       return res.redirect("/home/login");
     }
 
     const user_id = req.session.user_id;
     const item_id = req.params.item;
+
     const query =
-      `INSERT
-     FROM favorites
-     WHERE user_id = $1
-     AND item_id = $2
-     RETURNING *;`;
-    db.query(query, [user_id, item_id])
+    `DELETE
+    FROM favorites
+    WHERE user_id = $1
+    AND item_id = $2
+    RETURNING *;`;
+    db.query(query,[user_id,item_id])
       .then(data => {
-        res.redirect("/home/item/:item");
+        res.redirect(`/home/item/${item_id}`);
       })
       .catch(err => {
         res
