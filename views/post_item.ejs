@@ -8,6 +8,18 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/post_item.css" type="text/css" />
 
   <title>Post New Item - BUY/SELL</title>
 </head>
@@ -16,42 +28,48 @@
 
   <%- include('partials/_header'); %>
 
-    <main style="margin: 1em;">
+    <main class="newitems" style="margin: 1em;">
       <h3>Post New Item</h3>
       <form class="form justify-content-center" action="/post_item" method="POST">
         <div class="form-group mb-2">
-          <label>Title:</label>
-          <input type="text" name="title" style="width: 300px;">
-          <label>Description:</label>
-          <input type="text" name="description" style="width: 300px;">
-          <label>Image URL:</label>
-          <input type="text" name="image" style="width: 300px;">
-          <label>Price:</label>
-          <input type="number" name="price" style="width: 300px;">
-          <label>Colour:</label>
-          <input type="text" name="colour" style="width: 300px;">
-          <label>Year:</label>
-          <input type="number" name="year" style="width: 300px;">
-          <label>Make:</label>
-          <input type="text" name="make" style="width: 300px;">
-          <label>Model:</label>
-          <input type="text" name="model" style="width: 300px;">
-          <button type="submit" class="btn btn-primary" style="margin-top: 1em;">Post</button>
+          <div>
+            <label>Title:</label>
+            <input type="text" name="title" style="width: 300px;">
+          </div>
+          <div class="description">
+            <label>Description:</label>
+            <input type="text" name="description" style="width: 400px;">
+          </div>
+          <div>
+            <label>Image URL:</label>
+            <input type="text" name="image" style="width: 300px;">
+          </div>
+          <div>
+            <label>Price:</label>
+            <input type="number" name="price" style="width: 300px;">
+          </div>
+          <div>
+            <label>Colour:</label>
+            <input type="text" name="colour" style="width: 300px;">
+          </div>
+          <div>
+            <label>Year:</label>
+            <input type="number" name="year" style="width: 300px;">
+          </div>
+          <div>
+            <label>Make:</label>
+            <input type="text" name="make" style="width: 300px;">
+          </div>
+          <div>
+            <label>Model:</label>
+            <input type="text" name="model" style="width: 300px;">
+          </div>
+          <button class="postbutton" style="margin-top: 1em;">Post Item</button>
         </div>
       </form>
     </main>
 
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,0 +1,37 @@
+body {
+  margin-top: 5em;
+  width: 80%;
+  justify-content: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #aeeed5;
+  background: radial-gradient(circle, #aeeed5 0%, #94bbe9 100%);
+}
+
+.newitems{
+  display: inline-block;
+  flex-direction: row;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  border: solid;
+  border-radius: 12px;
+  background: #aeeed5;
+  background: radial-gradient(circle, #aeeed5 0%, #949fe9 100%);
+}
+
+.postbutton {
+  font-size: 16px;
+  border: none;
+  padding: 15px 15px;
+  margin-right: 5px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: rgb(200, 183, 220);
+  color: black;
+  border: 2px solid gray;
+  transition-duration: 0.4s;
+}
+
+.postbutton:hover {
+  background-color: #008CBA;
+  color: white;
+}
