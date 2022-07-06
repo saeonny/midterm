@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -22,33 +23,55 @@
   <%- include('partials/_header'); %>
   <!-- <h1>Have fun! 🥔</h1> -->
   <div class = itemsPosted>
-    <div class = 'left-info'>
-      <img src = 'https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNhcnN8ZW58MHx8MHx8&w=1000&q=80' alt = 'benz convertible' width = '400' height = '300'>
+    <%= data[0].title %>
+    <% for(let i = 0; i < data.length; i++) { %>
+      <div class = 'left-info'>
+        <div class='favourite-container'>
+        <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
+        <div id="icons">
+          <a href= home/login alt=“Buy Tickets”>
+          <span>
+            <i class="fa-solid fa-heart"></i>
+          </span>
+        </a>
+        </div>
+        </div>
+      <div class='attribute-description'>
+       <div class ='atrributeHeader-description'>Description</div>
+       <span class='attributeValue-description'><%=data[i].description%></span>
+     </div>
+
     </div>
     <div class='middle-info'>
+      <div class ='groupItem-one'>
       <div class='title'>
-        <a href="#" class="'title">"2020 Mercedes Hybrid Titanium | MOONROOF | NAV | LEATHER |"</a>
+        <a href="#" class="'title"><%=data[i].title %></a>
+      </div>
+      <div class ='price'>$<%=data[i].price %></div>
+    </div>
+
+
+   <div class="car-details">
+     <div class='attribute-color'>
+       <div class ='atrributeHeader-color'>Color</div>
+       <span class='attributeValue-color'> <%=data[i].color%> </span>
       </div>
 
-       <div class='attribute-milage'>
-        <div class ='atrributeHeader-milage'>Kilometers</div>
-        <span class='attributeValue-milage'>50,000Km</span>
-      </div>
-
-      <div class='attribute-location'>
-        <div class ='atrributeHeader-location'>Location</div>
-        <span class='attributeValue-location'> Ontario</span>
-      </div>
-
-      <div class='attribute-feulType'>
-        <div class ='atrributeHeader-feulType'>Feul Type</div>
-        <span class='attributeValue-feulType'> hybrid</span>
+      <div class='attribute-model'>
+        <div class ='atrributeHeader-model'>Model</div>
+        <span class='attributeValue-model'> <%=data[i].model%></span>
       </div>
 
     </div>
-    <div class="'right-info">
-      <div class ='price'>$53,995.00</div>
+
+      <div class='attribute-datePosted'>
+        <div class ='atrributeHeader-model'>Date posted</div>
+        <span class='attributeValue-model'> <%=data[i].date_posted%></span>
+      </div>
+
     </div>
+    <%}%>
+
   </div>
 
 

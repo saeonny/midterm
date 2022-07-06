@@ -77,11 +77,16 @@ const postitem = require("./routes/post_item")
 app.use( "/home/", postitem(db));
 
 
-
-
+const homepage_item = require("./routes/item");
+app.use( "/", homepage_item(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
+
+// app.get("/", (req, res) => {
+//   res.render("index",{user_id:null,user_name:null});
+// });
 
 app.get("/", (req, res) => {
   const templateVar = {user_id:null,user_name:null}
