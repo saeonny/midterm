@@ -19,11 +19,16 @@ module.exports = (db) => {
     const thumbnail_photo_url = req.body.thumbnail_photo_url;
     const price = (req.body.price * 100);
     const color = req.body.color;
-    const date_posted = req.body.date_posted;
+    const date_posted = req.body.date_posted; // change to current time
     const available = req.body.available;
     const year =  req.body.year;
     const make = req.body.make;
     const model = req.body.model;
+
+    if(title ===null || description ===null || thumbnail_photo_url === null || thumbnail_photo_url === null || price === null||
+      color===null || color === null || date_posted === null || available === null || year === null || make === null || model ===null){
+        return res.send("please put vaild inputs")
+      }
 
     const query =
     `INSERT INTO items
