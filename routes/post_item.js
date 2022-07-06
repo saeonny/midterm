@@ -16,14 +16,16 @@ module.exports = (db) => {
   router.post("/postitem", (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
-    const thumbnail_photo_url = req.body.thumbnail_photo_url;
-    const price = (req.body.price * 100);
-    const color = req.body.color;
-    const date_posted = req.body.date_posted; // change to current time
-    const available = req.body.available;
+    const thumbnail_photo_url = req.body.image;
+    const price = req.body.price;
+    const color = req.body.colour;
+    const date_posted = new Date()
+    const available = true;
     const year =  req.body.year;
     const make = req.body.make;
     const model = req.body.model;
+    console.log(thumbnail_photo_url);
+
 
     if(title ===null || description ===null || thumbnail_photo_url === null || thumbnail_photo_url === null || price === null||
       color===null || color === null || date_posted === null || available === null || year === null || make === null || model ===null){
