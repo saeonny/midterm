@@ -6,10 +6,11 @@ module.exports = (db) => {
 
   router.get("/postitem", (req, res) => {
     ////////////////////////if user is not admin///////////////////////////////////////////
-    if(user.name !== "Admin" || user.email !== 'admin@gmail.com'){
-      res.redirect("/")
+    if(req.session.user_id !== 1){
+      return res.redirect("/")
     }
-    res.render("postitem")
+    const templateVar ={user_id : req.session.user_id, user_name : req.session.user_name}
+    res.render("post_item",templateVar)
   })
 
   router.post("/postitem", (req, res) => {
