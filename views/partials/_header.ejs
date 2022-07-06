@@ -1,6 +1,6 @@
 <header>
   <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-success">
-    <a class="navbar-brand" href="/urls">BUY/SELL CARS</a>
+    <a class="navbar-brand" href="/home/login">BUY/SELL CARS</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,29 +9,22 @@
         <a class="nav-item nav-link" href="/home/favorites">My CARS</a>
         <a class="nav-item nav-link" href="#">Messages</a>
       </div>
-    </div>
-
-
+    <div>
     <% if(user_id) { %>
+      <form method="POST" action="/home/logout" class="navbar-nav d-flex justify-content-between">
+        <p class="mr-sm-2 my-2">Logged in as : <%= user_name %></p>
+        <button type="submit" class="btn btn-outline-dark">Log out</button>
+      </form>
 
-      <div class="form-group mx-sm-3 mb-2">
-        <button type="submit" class="btn btn-outline-light"> <%=user_name%> </button>
-      </div>
-      <form class="nav justify-content-end" action = "/home/logout" method ="POST">
-      <button type="submit" class="btn btn-outline-light">Logout</button>
+    <% } else { %>
+    <form method="GET" action="/home/login" class="navbar-nav d-flex justify-content-between">
+      <a class="nav-item nav-link" href="/home/login">Login</a>
+      <form method="GET" action="/home/register" class="navbar-nav d-flex justify-content-between">
+        <a class="nav-item nav-link" href="/home/register">Register</a>
+      </form>
     </form>
-  <% } %>
-
-
-
-    <% if(!user_id) { %>
-    <a href="/home/login">
-      <button type="submit" class="btn btn-outline-light">Login</button>
-    </a>
-    <a href = "/home/register">
-      <button type="submit" class="btn btn-outline-light">Register</button>
-    </a>
-    <% } %>
-
+    <%}%>
+    </div>
+    </div>
   </nav>
 </header>
