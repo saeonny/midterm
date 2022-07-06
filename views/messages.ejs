@@ -31,24 +31,19 @@
 
   <title>Messages - BUY/SELL</title>
 </head>
+
 <body>
   <%- include('partials/_header'); %>
-  <%- if(user_id) { %>
-  <form class="message-container" action="/messages/" method="POST" >
-    <label for="message-text"> Write a Message</label>
-    <textarea name="text" class="message-text"></textarea>
-    <button class="message-button" type="submit">Send</button>
-  </form>
-  <% } %>
 
-  <%- if(!user_id) { %>
-    <a href="/home/login">
-      <button type="submit" class="btn btn-outline-light">Login</button>
-    </a>
-    <a href = "/home/register">
-      <button type="submit" class="btn btn-outline-light">Register</button>
-    </a>
-  <% } %>
+    <div container="messages-container">
+      <div container = "messages-list">
+        <%- message_list %>
+
+      </div>
+
+
+    
 
 </body>
+
 </html>

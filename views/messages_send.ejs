@@ -29,19 +29,21 @@
 
 
 
-  <title>Favourites - BUY/SELL</title>
+  <title>Messages - BUY/SELL</title>
 </head>
 
 <body>
   <%- include('partials/_header'); %>
-    <%= data %>
 
+   
 
+      <form class="message-container" action="/messages/" method="POST">
+        <label for="message-text"> Write a Message</label>
+        <textarea name="text" class="message-text"></textarea>
+        <button class="message-button" type="submit">Send</button>
+      </form>
 
-
-
-
-
+    </div>
 
 </body>
 

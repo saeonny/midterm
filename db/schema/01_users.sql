@@ -41,11 +41,12 @@ CREATE TABLE favorites (
 CREATE TABLE messages (
   id SERIAL PRIMARY KEY NOT NULL,
 
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  receiver_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
 
   message VARCHAR(255) NOT NULL,
-  message_data_time TIMESTAMP NOT NULL
+  message_data_time TIMESTAMP WITHOUT TIME ZONE NOT NULL
 
 );
 
