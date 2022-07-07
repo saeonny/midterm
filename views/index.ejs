@@ -24,6 +24,7 @@
   <!-- <h1>Have fun! 🥔</h1> -->
   <div class = itemsPosted>
     <% for(let i = 0; i < data.length; i++) { %>
+      <card class="itemscard">
       <div class = 'left-info'>
         <div class='favourite-container'>
         <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
@@ -38,7 +39,7 @@
         </div>
         </div>
       <div class='attribute-description'>
-       <div class ='atrributeHeader-description'>Description</div>
+       <div class ='atrributeHeader-description'><strong>Description:</strong></div>
        <span class='attributeValue-description'><%=data[i].description%></span>
      </div>
 
@@ -46,36 +47,35 @@
     <div class='middle-info'>
       <div class ='groupItem-one'>
       <div class='title'>
-        <a href="#" class="'title"><%=data[i].title %></a>
+        <a href="#" class="'title"><strong><%=data[i].title %></strong></a>
       </div>
-      <div class ='price'>$<%=data[i].price %></div>
+      <div class ='price'><strong>$<%=data[i].price %></strong></div>
     </div>
 
 
    <div class="car-details">
      <div class='attribute-color'>
-       <div class ='atrributeHeader-color'>Color</div>
+       <div class ='atrributeHeader-color'><strong>Color:</strong></div>
        <span class='attributeValue-color'> <%=data[i].color%> </span>
       </div>
 
       <div class='attribute-model'>
-        <div class ='atrributeHeader-model'>Model</div>
+        <div class ='atrributeHeader-model'><strong>Model:</strong></div>
         <span class='attributeValue-model'> <%=data[i].model%></span>
       </div>
 
     </div>
 
       <div class='attribute-datePosted'>
-        <div class ='atrributeHeader-model'>Date posted</div>
+        <div class ='atrributeHeader-model'><strong>Date posted:</strong></div>
         <span class='attributeValue-model'> <%=data[i].date_posted%></span>
       </div>
 
     </div>
+  </card>
     <%}%>
 
   </div>
-
-
 
 
 
