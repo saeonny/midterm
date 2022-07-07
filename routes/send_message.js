@@ -11,7 +11,7 @@ module.exports = (db) => {
       return res.redirect("/")
       //add some error message : )
     }
-    //this case is for blocking messaging 
+    //this case is for blocking messaging
     // if ((user_id!==1 && for_user_id === user_id)|| (user_id ===1)){}
 
       if (req.session.user_id) {
@@ -148,7 +148,7 @@ const adminMessagesToHtml = function (messages, item_id, user_id, for_user_id) {
     if (message.sender_id === user_id) {
       html += `
       <div class = sender>
-        <p>me(admin):<br>
+        <p><strong>me(admin):</strong><br>
            ${message.message}</p>
       </div>
       `
@@ -157,7 +157,7 @@ const adminMessagesToHtml = function (messages, item_id, user_id, for_user_id) {
     else if (message.sender_id == for_user_id) {
       html += `
       <div class = "receiver">
-        <p>${message.sender}:<br>
+        <p><strong>${message.sender}:</strong><br>
         ${message.message}</p>
         </div>
       `
