@@ -15,6 +15,9 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="/home/favorites">My Favourites</a>
           <a class="nav-item nav-link" href="/home/messages">Messages</a>
+          <% if(user_id === 1) { %>
+            <a class="nav-item nav-link" href="/home/postitem">Post New Item</a>
+            <%} %>
         </div>
         <div>
           <% if(user_id) { %>
