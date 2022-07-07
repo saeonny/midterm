@@ -189,7 +189,7 @@ const messagesToHtml = function (messages, item_id, user_id, for_user_id) {
     if (message.sender_id === user_id) {
       html += `
       <div class = sender>
-        <p>me:<br>
+        <p><strong>me:</strong><br>
            ${message.message}</p>
       </div>
       `
@@ -197,7 +197,7 @@ const messagesToHtml = function (messages, item_id, user_id, for_user_id) {
     if (message.sender_id === 1) {
       html += `
       <div class = "receiver">
-        <p>admin:<br>
+        <p><strong>admin:</strong><br>
         ${message.message}</p>
         </div>
 
@@ -209,8 +209,10 @@ const messagesToHtml = function (messages, item_id, user_id, for_user_id) {
   </div>
   <form class="message-container" action="/home/send/messages/${item_id}/for/${for_user_id}" method="POST">
 
-        <textarea name="text" class="message-text"></textarea>
+        <textarea name="text" class="message-text" placeholder="Send message here"></textarea>
+        <div>
         <button class="message-button" type="submit">Send</button>
+        </div>
   </form>
 
   `
