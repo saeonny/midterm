@@ -36,12 +36,14 @@ module.exports = (db) => {
             return db.query(itemQuery, [item_id])
               .then((result) => {
                 const item = result.rows[0]
-                let html = toHtml(item);
+                let html = toHtml(item, user_id);
                 html += `
               <form method = "POST" action = "/home/item/favourites/${item.id}">
               <button class="favbutton"> add to favourites </button>
-              </form></div></div>`   //////add delete item bt and  sold out bt remove contact if admin
-                templateVar.data = html;
+              </form></div></div>`
+                //////add delete item bt and  sold out bt remove contact if admin
+                if (req.session.id === 1)
+                  templateVar.data = html;
                 return res.render('detailed_item', templateVar)
               })
           }
@@ -49,7 +51,7 @@ module.exports = (db) => {
             return db.query(itemQuery, [item_id])
               .then((result) => {
                 const item = result.rows[0]
-                let html = toHtml(item);
+                let html = toHtml(item, user_id);
                 html += `
               <form method = "POST" action = "/home/item/remove/${item.id}">
               <button class="favbutton"> remove from favourites </button>
@@ -70,13 +72,13 @@ module.exports = (db) => {
       return db.query(itemQuery, [item_id])
         .then((data) => {
           const item = data.rows[0];
-          let html = toHtml(item);
+          let html = toHtml(item, user_id);
           html += `<form method = "POST" action = "/home/item/favourites/${item.id}">
         <button class="favbutton"> add to favourites </button>
         </form>
       </div>
         </div>`
-        //////add delete item bt and  sold out bt if admin
+          //////add delete item bt and  sold out bt if admin
           templateVar.data = html;
           return res.render('detailed_item', templateVar)
         })
@@ -110,7 +112,7 @@ module.exports = (db) => {
   })
 
   router.post("/remove/:item", (req, res) => {
-    if (!req.session.user_id ) {
+    if (!req.session.user_id) {
       return res.redirect("/home/login");
     }
 
@@ -133,29 +135,29 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   })
- //only for users
+  //only for users
   router.post("/messages/:item", (req, res) => {
     const item_id = req.params.item
     const user_id = req.session.user_id
-    if(!req.session.user_id) {
+    if (!req.session.user_id) {
       res.redirect("/home/login")
     }
 
-    if(req.session.user_id === 1) {
+    if (req.session.user_id === 1) {
       res.redirect(`/home/item/${item_id}`)
     }
 
 
-    if(req.session.user_id !== 1){
-    res.redirect(`/home/message/send/${item_id}/for/${user_id}`)
+    if (req.session.user_id !== 1) {
+      res.redirect(`/home/message/send/${item_id}/for/${user_id}`)
     }
 
   })
 
-  const toHtml = function (data) {
+  const toHtml = function (data, user_id) {
     const item = data;
-//remove contact for admin, add
-    const html =
+    //remove contact for admin, add
+    let html =
       `<div class = "detailed_item_card">
   <img class="itemphoto" src=${item.thumbnail_photo_url}>
   <form>
@@ -169,11 +171,25 @@ module.exports = (db) => {
   <div><strong>Year:</strong> ${item.year}</div>
   <div><strong>Make:</strong> ${item.make}</div>
   <div><strong>Model:</strong> ${item.model}</div>
-  </form>
-  <div class = buttons>
-  <form method = "POST" action = "/home/item/messages/${item.id}">
-  <button class="contactbutton"> contact </button>
-  </form>
+  </form>`
+    if (user_id !== 1) {
+      html += `<div class = buttons>
+      <form method = "POST" action = "/home/item/messages/${item.id}">
+      <button class="contactbutton"> contact </button>`
+    }
+
+    if (user_id === 1) {
+
+      html += `<div class = buttons>
+        <form method = "POST" action = "/home/item/remove/fromlist/${item.id}">
+        <button class="contactbutton"> delete item </button>
+      <form method = "POST" action = "/home/item/soldout/fromlist/${item.id}">
+        <button class="contactbutton"> sold out </button>`
+
+
+    }
+
+    html += `</form>
 
   `;
     return html;
