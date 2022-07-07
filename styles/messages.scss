@@ -10,9 +10,10 @@ body{
 .messagecard{
   display: table;
   padding: 15px 15px 15px 15px;
-  margin: 25px;
+  margin: 20px auto;
+  width: 50%;
   text-align: center;
-  margin-left: 550px;
+  // margin-left: 550px;
   border: solid;
   border-radius: 12px;
   background: rgb(174,238,213);
