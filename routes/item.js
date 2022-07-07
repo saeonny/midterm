@@ -18,5 +18,30 @@ module.exports = (db) => {
       });
 
   });
+
+  router.post('/home/favorites/:item_id', (req, res) => {
+
+    const user_id = req.session.user_id;
+    const item_id = req.params.item;
+
+    if(!user_id) {
+      return res.redirect('/');
+    }
+    const query =`
+      INSERT INTO favorites (item_id,user_id)
+      VALUES ($1,$2)
+     RETURNING *;
+     `
+    return db.query(query, [item_id, user_id])
+      .then(data => {
+        return res.redirect('/home/favorites');
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  })
+
   return router;
 }

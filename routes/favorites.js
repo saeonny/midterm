@@ -69,7 +69,34 @@ module.exports = (db) => {
     res.redirect(`/home/item/${item_id}`)
   })
 
+  router.post("/favorite/:item", (req,res) => {
+    if(!req.session.user_id || req.session.user_id === 1) {
+      return res.redirect("/home/login")
+    }
+    const user_id = req.session.user_id;
+    const item_id = req.params.item;
 
+
+    const query =
+    `SELECT item.*
+     FROM favorites
+     JOIN users ON user_id = users.id
+     JOIN items ON item_id = items.id
+     WHERE user_id = $1
+     AND item_id = $2
+     RETURNING *; `
+     db.query(query, [user_id, item_id])
+     .then(data => {
+      const templateVars = {data : data.rows , user_id : user_id , user_name: req.session.user_name};
+      return res.render("favorite", templateVars);
+     })
+     .catch (err => {
+        res
+        .status(500)
+        .json({error: err.message})
+     });
+
+  })
 
 
   return router;

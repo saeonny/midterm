@@ -79,6 +79,8 @@ app.use( "/home/", postitem(db));
 
 const homepage_item = require("./routes/item");
 app.use( "/", homepage_item(db));
+
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
@@ -88,14 +90,14 @@ app.use( "/", homepage_item(db));
 //   res.render("index",{user_id:null,user_name:null});
 // });
 
-app.get("/", (req, res) => {
-  const templateVar = {user_id:null,user_name:null}
-  if(req.session.user_id){
-    templateVar.user_id = req.session.user_id
-    templateVar.user_name = req.session.user_name
-  }
-  res.render("index",templateVar);
-});
+// app.get("/", (req, res) => {
+//   const templateVar = {user_id:null,user_name:null}
+//   if(req.session.user_id){
+//     templateVar.user_id = req.session.user_id
+//     templateVar.user_name = req.session.user_name
+//   }
+//   res.render("index",templateVar);
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

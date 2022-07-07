@@ -23,17 +23,20 @@
   <%- include('partials/_header'); %>
   <!-- <h1>Have fun! 🥔</h1> -->
   <div class = itemsPosted>
-    <%= data[0].title %>
     <% for(let i = 0; i < data.length; i++) { %>
       <div class = 'left-info'>
         <div class='favourite-container'>
         <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
         <div id="icons">
-          <a href= home/login alt=“Buy Tickets”>
-          <span>
+          <!-- <a href= home/login alt=“Buy Tickets”> -->
+          <form  method = POST action="/home/favorites/<%= data[i].id %>">
+          <button type = 'submit' class="btn btn-outline-danger">like</button>
+          <!-- <span>
             <i class="fa-solid fa-heart"></i>
-          </span>
-        </a>
+          </span> -->
+          </form>
+        </button>
+        <!-- </a> -->
         </div>
         </div>
       <div class='attribute-description'>
