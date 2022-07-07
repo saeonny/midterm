@@ -21,7 +21,6 @@
 
 <body>
   <%- include('partials/_header'); %>
-  <!-- <h1>Have fun! 🥔</h1> -->
   <div class = itemsPosted>
     <% for(let i = 0; i < data.length; i++) { %>
       <div class = 'left-info'>
@@ -31,15 +30,22 @@
           <!-- <a href= home/login alt=“Buy Tickets”> -->
           <form  method = POST action="/home/favorites/<%= data[i].id %>">
           <button id='favorite-icon' type = 'submit' class="fa-solid fa-heart">
-        </button>
+          </button>
           </form>
-        </button>
-
         </div>
-        </div>
+      </div>
       <div class='attribute-description'>
-       <div class ='atrributeHeader-description'>Description</div>
-       <span class='attributeValue-description'><%=data[i].description%></span>
+        <div class ='atrributeHeader-description'>Description</div>
+        <span class='attributeValue-description'><%=data[i].description%></span>
+        <!-- admin logs in  -->
+          <% if (user_id === 1) { %>
+          <div class="group-button">
+          <button  id= 'sold-button' type="submit" class="btn btn-outline-dark delete-button">Sold</button>
+          <form method=POST action="/home/remove/<%= data[i].id%>">
+            <button type="submit" class="btn btn-outline-dark delete-button">Delete</button>
+          </form>
+          </div>
+          <%}%>
      </div>
 
     </div>
