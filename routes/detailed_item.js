@@ -33,31 +33,31 @@ module.exports = (db) => {
         .then((result1) => {
           //this item is not liked by user so dont need delete button
           if (result1.rows.length === 0) {
-            return db.query(itemQuery,[item_id])
-            .then((result)=> {
-              const item = result.rows[0]
-              let html = toHtml(item);
-              html += `
+            return db.query(itemQuery, [item_id])
+              .then((result) => {
+                const item = result.rows[0]
+                let html = toHtml(item);
+                html += `
               <form method = "POST" action = "/home/item/favourites/${item.id}">
               <button class="favbutton"> add to favourites </button>
               </form></div></div>`
-              templateVar.data = html;
-              return res.render('detailed_item',templateVar)
-            })
+                templateVar.data = html;
+                return res.render('detailed_item', templateVar)
+              })
           }
           if (result1.rows.length !== 0) {
-            return db.query(itemQuery,[item_id])
-            .then((result)=> {
-              const item = result.rows[0]
-              let html = toHtml(item);
-              html += `
+            return db.query(itemQuery, [item_id])
+              .then((result) => {
+                const item = result.rows[0]
+                let html = toHtml(item);
+                html += `
               <form method = "POST" action = "/home/item/remove/${item.id}">
               <button class="favbutton"> remove from favourites </button>
               </form></div> </div>
               `
-              templateVar.data = html;
-              return res.render('detailed_item',templateVar)
-            })
+                templateVar.data = html;
+                return res.render('detailed_item', templateVar)
+              })
 
 
           }
@@ -67,18 +67,18 @@ module.exports = (db) => {
     }
 
     else {
-      return db.query(itemQuery,[item_id])
-      .then((data) => {
-        const item = data.rows[0];
-        let html = toHtml(item);
-        html += `<form method = "POST" action = "/home/item/favourites/${item.id}">
+      return db.query(itemQuery, [item_id])
+        .then((data) => {
+          const item = data.rows[0];
+          let html = toHtml(item);
+          html += `<form method = "POST" action = "/home/item/favourites/${item.id}">
         <button class="favbutton"> add to favourites </button>
         </form>
       </div>
         </div>`
-        templateVar.data = html;
-        return res.render('detailed_item',templateVar)
-      })
+          templateVar.data = html;
+          return res.render('detailed_item', templateVar)
+        })
 
 
     }
@@ -97,7 +97,7 @@ module.exports = (db) => {
       `INSERT INTO favorites (item_id,user_id)
       VALUES ($1,$2)
      RETURNING *;`;
-    db.query(query, [item_id, user_id])
+    db.query(query, [item_id, item_id])
       .then(data => {
         res.redirect(`/home/item/${item_id}`);
       })
@@ -117,12 +117,12 @@ module.exports = (db) => {
     const item_id = req.params.item;
 
     const query =
-    `DELETE
+      `DELETE
     FROM favorites
     WHERE user_id = $1
     AND item_id = $2
     RETURNING *;`;
-    db.query(query,[user_id,item_id])
+    db.query(query, [user_id, item_id])
       .then(data => {
         res.redirect(`/home/item/${item_id}`);
       })
@@ -133,35 +133,16 @@ module.exports = (db) => {
       });
   })
 
-      // router.post("/home/messages/:item", (req, res) =>{
-      //   if(!req.session.user_id|| req.session.user_id === 1){
-      //     return res.redirect("/home/login")
-      //   }
+  router.post("/messages/:item", (req, res) => {
+    const item_id = req.params.item
+    res.redirect(`/home/message/send/${item_id}`)
+  })
 
-      //   const user_id = req.session.user_id;
-      //   const item_id = req.params.item;
-      //   const query =
-      //   `INSERT
-      //    FROM messages
-      //    WHERE user_id = $1
-      //    AND item_id = $2
-      //    RETURNING *;`
-      //   db.query(query, [user_id, item_id])
-      //     .then(data => {
-      //       res.redirect("/home/messages/:item")
-      //   })
-      //     .catch(err => {
-      //       res
-      //       .status(500)
-      //       .json({error: err.message})
-      //   });
-      // })
-
-  const toHtml = function (data){
+  const toHtml = function (data) {
     const item = data;
 
     const html =
-    `<div class = "detailed_item_card">
+      `<div class = "detailed_item_card">
   <img class="itemphoto" src=${item.thumbnail_photo_url}>
   <form>
   <div><strong>Item #:</strong> ${item.id}</div>
@@ -176,12 +157,12 @@ module.exports = (db) => {
   <div><strong>Model:</strong> ${item.model}</div>
   </form>
   <div class = buttons>
-  <form method = "POST" action = "/home/messages/${item.id}">
+  <form method = "POST" action = "/home/item/messages/${item.id}">
   <button class="contactbutton"> contact </button>
   </form>
 
   `;
-  return html;
+    return html;
   }
 
 
