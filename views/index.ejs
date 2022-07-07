@@ -24,6 +24,10 @@
     <% for(let i = 0; i < data.length; i++) { %>
       <card class="itemscard">
       <div class = 'left-info'>
+        <!-- <% if ( !data[i].available) {%>
+          <div><h3><strong>SOLD OUT</strong></h3></div>
+          <%}%> -->
+
         <div class='favourite-container'>
         <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
         <div id="icons">
