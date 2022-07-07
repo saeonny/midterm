@@ -1,5 +1,5 @@
-Vroom
-# Buy/Sell Midterm Project
+
+# Buy/Sell Midterm Project -- "Vroom"
 
 Hello! Welcome to our app, where you can request to list your car for sale and also request to purchase cars!
 
