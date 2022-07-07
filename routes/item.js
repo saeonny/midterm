@@ -69,7 +69,7 @@ module.exports = (db) => {
     const item_id = req.params.item;
     const query =
     `UPDATE items
-     SET available = true
+     SET available = false
      WHERE id = $1
      RETURNING *;`
     db.query(query, [item_id])
