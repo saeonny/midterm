@@ -81,15 +81,24 @@ div.details{
   position:relative;
 }
 
-.favourite-container span{
+.favourite-container button{
     position: absolute;
-    top:1em;
-    right:4em;
+    top:2em;
+    right:6em;
     border-radius:1.5em;
     color:white;
     padding:1em 1.5em;
   }
 
-  #icons i:hover {
+  #icons button:hover {
     color: rgb(182, 182, 0);
   }
+
+
+  #favorite-icon {
+    padding: 0;
+    border: none;
+    background: none;
+    color: white;
+  }
+
