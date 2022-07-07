@@ -51,7 +51,7 @@ module.exports = (db) => {
                 let html = toHtml(item, user_id);
                 html += `
               <form method = "POST" action = "/home/item/remove/${item.id}">
-              <button class="favbutton"> remove from favourites </button>
+              <button class="favbutton"> remove from favorites </button>
               </form></div> </div>
               ` //////add delete item bt and  sold out bt if admin
 
@@ -152,12 +152,43 @@ module.exports = (db) => {
 
   })
 
+  router.post("/fav/remove/fromlist/:item", (req, res) => {
+    const item_id = req.params.item;
+
+    return db.query(`DELETE FROM items WHERE id = $1`, [item_id])
+      .then(() => {
+        res.redirect("/")
+      })
+
+  })
+  router.post("/fav/soldout/fromlist/:item", (req, res) => {
+    const item_id = req.params.item;
+    return db.query(`UPDATE items SET available = false WHERE id = $1`, [item_id])
+      .then(() => {
+        res.redirect(`/home/item/${item_id}`)
+      })
+
+  })
+  router.post("/fav/restock/fromlist/:item", (req, res) => {
+    const item_id = req.params.item;
+    return db.query(`UPDATE items SET available = true WHERE id = $1`, [item_id])
+      .then(() => {
+        res.redirect(`/home/item/${item_id}`)
+      })
+
+  })
+
   const toHtml = function (data, user_id) {
     const item = data;
     //remove contact for admin, add
     let html =
-      `<div class = "detailed_item_card">
-  <img class="itemphoto" src=${item.thumbnail_photo_url}>
+      `<div class = "detailed_item_card">`
+      if(item.available === false) {
+        html += `<h3><strong>SOLD OUT</strong></h3>`
+      }
+
+
+    html += `<img class="itemphoto" src=${item.thumbnail_photo_url}>
   <form>
   <div><strong>Item #:</strong> ${item.id}</div>
   <div><strong>Car Title:</strong> ${item.title}</div>
@@ -173,16 +204,25 @@ module.exports = (db) => {
     if (user_id !== 1) {
       html += `<div class = buttons>
       <form method = "POST" action = "/home/item/messages/${item.id}">
-      <button class="contactbutton"> contact </button>`
+      <button class="contactbutton"> contact </button></form>`
     }
 
     if (user_id === 1) {
 
       html += `<div class = buttons>
-        <form method = "POST" action = "/home/item/remove/fromlist/${item.id}">
-        <button class="contactbutton"> delete item </button>
-      <form method = "POST" action = "/home/item/soldout/fromlist/${item.id}">
-        <button class="contactbutton"> sold out </button>`
+        <form method = "POST" action = "/home/item/fav/remove/fromlist/${item.id}">
+        <button class="contactbutton"> delete item </button></form>`
+
+      if (item.available === true) {
+        html += `<form method = "POST" action = "/home/item/fav/soldout/fromlist/${item.id}">
+       <button class="contactbutton"> sold out </button></form>`
+      }
+
+      if (item.available === false) {
+        html += `<form method = "POST" action = "/home/item/fav/restock/fromlist/${item.id}">
+       <button class="contactbutton"> restock </button></form>`
+      }
+
 
 
     }
