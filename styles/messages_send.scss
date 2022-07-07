@@ -1,0 +1,39 @@
+body{
+  margin-top: 7em;
+  width: 90%;
+  margin-left: 5em;
+
+
+}
+.message-all-container{
+  display: flex;
+  flex-direction: column;
+  row-gap: 2em;
+
+
+}
+.chat-log{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  column-gap: 1em;
+  border-style: double;
+}
+.sender{
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  row-gap: 0;
+
+}
+.receiver{
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  row-gap: 0;
+}
+textarea{
+  width: 60%;
+}
+
+

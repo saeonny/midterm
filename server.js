@@ -79,9 +79,14 @@ app.use( "/home/item", item(db));
 const postitem = require("./routes/post_item")
 app.use( "/home", postitem(db));
 
-
+////////HOMEPAGE/////////////////
 const homepage_item = require("./routes/item");
 app.use( "/", homepage_item(db));
+
+
+////////HOME/MESSAGE/SEND////////////////
+const send_message = require("./routes/send_message");
+app.use("/home",send_message(db))
 
 
 // Home page
