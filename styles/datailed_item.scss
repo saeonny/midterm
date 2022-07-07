@@ -58,3 +58,7 @@ body{
   background-color: #008CBA;
   color: white;
 }
+.buttons {
+  display: flex;
+  flex-direction: column;
+}

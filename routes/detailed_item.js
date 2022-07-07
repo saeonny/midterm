@@ -13,9 +13,7 @@ module.exports = (db) => {
       FROM items
       WHERE id = $1
       `
-
-
-    //check login
+    //check if user is logined
     if (req.session.user_id) {
       templateVar.user_id = req.session.user_id;
       templateVar.user_name = req.session.user_name;
@@ -28,25 +26,24 @@ module.exports = (db) => {
       `
 
 
-
       return db.query(favQuery, [user_id, item_id])
         .then((result1) => {
-          //this item is not liked by user so dont need delete button
+          // if user is not like that item then add "add to fav bt"
           if (result1.rows.length === 0) {
             return db.query(itemQuery, [item_id])
               .then((result) => {
                 const item = result.rows[0]
                 let html = toHtml(item, user_id);
                 html += `
-              <form method = "POST" action = "/home/item/favourites/${item.id}">
+              <form method = "POST" action = "/home/item/fav/favourites/${item.id}">
               <button class="favbutton"> add to favourites </button>
               </form></div></div>`
                 //////add delete item bt and  sold out bt remove contact if admin
-                if (req.session.id === 1)
-                  templateVar.data = html;
+                templateVar.data = html
                 return res.render('detailed_item', templateVar)
               })
           }
+          // if user like that item then add "remove from fav bt"
           if (result1.rows.length !== 0) {
             return db.query(itemQuery, [item_id])
               .then((result) => {
@@ -57,7 +54,9 @@ module.exports = (db) => {
               <button class="favbutton"> remove from favourites </button>
               </form></div> </div>
               ` //////add delete item bt and  sold out bt if admin
+
                 templateVar.data = html;
+                console.log(templateVar.data)
                 return res.render('detailed_item', templateVar)
               })
 
@@ -67,13 +66,13 @@ module.exports = (db) => {
 
         })
     }
-
+    //if user is not logined then "give just fav bt"
     else {
       return db.query(itemQuery, [item_id])
         .then((data) => {
           const item = data.rows[0];
           let html = toHtml(item, user_id);
-          html += `<form method = "POST" action = "/home/item/favourites/${item.id}">
+          html += `<form method = "POST" action = "/home/item/fav/favourites/${item.id}">
         <button class="favbutton"> add to favourites </button>
         </form>
       </div>
@@ -91,8 +90,7 @@ module.exports = (db) => {
   //post sold out
   //
 
-  router.post("/favourites/:item", (req, res) => {
-
+  router.post("/fav/favourites/:item", (req, res) => {
 
     const user_id = req.session.user_id;
     const item_id = req.params.item;
@@ -100,7 +98,7 @@ module.exports = (db) => {
       `INSERT INTO favorites (item_id,user_id)
       VALUES ($1,$2)
      RETURNING *;`;
-    db.query(query, [item_id, item_id])
+    db.query(query, [item_id, user_id])
       .then(data => {
         res.redirect(`/home/item/${item_id}`);
       })
@@ -190,7 +188,6 @@ module.exports = (db) => {
     }
 
     html += `</form>
-
   `;
     return html;
   }
