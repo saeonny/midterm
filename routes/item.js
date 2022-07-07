@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const itemList = require ('../db/helperFunctions/item');
+const itemList = require('../db/helperFunctions/item');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
@@ -9,10 +9,10 @@ module.exports = (db) => {
     return itemList.getdataFromDb(db)
 
       .then(data => {
-        const templateVars = {data : data.rows , user_id : null , user_name: null};
-        if(req.session.user_id){
+        const templateVars = { data: data.rows, user_id: null, user_name: null };
+        if (req.session.user_id) {
           templateVars.user_id = req.session.user_id,
-          templateVars.user_name = req.session.user_name
+            templateVars.user_name = req.session.user_name
         }
         return res.render("index", templateVars);
       });
@@ -24,10 +24,10 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const item_id = req.params.item_id;
 
-    if(!user_id) {
+    if (!user_id) {
       return res.redirect('/');
     }
-    const query =`
+    const query = `
       INSERT INTO favorites (item_id,user_id)
       VALUES ($1,$2)
      RETURNING *;
@@ -44,44 +44,65 @@ module.exports = (db) => {
   });
 
 
-  router.post("/home/remove/:item", (req, res) =>{
+  router.post("/home/remove/:item", (req, res) => {
     const user_id = req.session.user_id;
     const item_id = req.params.item;
     const query =
-    `DELETE
+      `DELETE
      FROM items
      WHERE id = $1
      RETURNING *;`
     db.query(query, [item_id])
       .then(data => {
         res.redirect("/")
-    })
+      })
       .catch(err => {
         res
-        .status(500)
-        .json({error: err.message})
-    });
+          .status(500)
+          .json({ error: err.message })
+      });
   });
 
 
-  router.post("/home/soldout/:item", (req, res) =>{
+  router.post("/home/soldout/:item", (req, res) => {
     const user_id = req.session.user_id;
     const item_id = req.params.item;
     const query =
-    `UPDATE items
+      `UPDATE items
      SET available = false
      WHERE id = $1
      RETURNING *;`
     db.query(query, [item_id])
       .then(data => {
         res.redirect("/")
-    })
+      })
       .catch(err => {
         res
-        .status(500)
-        .json({error: err.message})
-    });
+          .status(500)
+          .json({ error: err.message })
+      });
   });
+
+  router.post("/home/restock/:item", (req, res) => {
+    const user_id = req.session.user_id;
+    const item_id = req.params.item;
+    const query =
+      `UPDATE items
+     SET available = true
+     WHERE id = $1;
+    `
+    db.query(query, [item_id])
+      .then(() => {
+        res.redirect("/")
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message })
+      });
+
+
+  })
 
   return router;
 }

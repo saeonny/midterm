@@ -38,14 +38,28 @@
         <div class='title'>
           <a href="/home/item//<%= data[i].id%>" class="'title"><strong><%=data[i].title %></strong></a>
         </div>
+        <% if(!data[i].available) { %>
+          <div><strong><h3>SOLD OUT</h3></strong></div>
+
+
+        <% } %>
         <div class ='atrributeHeader-description'><strong>Description:</strong></div>
         <span class='attributeValue-description'><%=data[i].description%></span>
         <!-- admin logs in  -->
           <% if (user_id === 1) { %>
+            <% if (data[i].available === true) { %>
           <div class="group-button">
            <form method=POST action="/home/soldout/<%= data[i].id%>">
             <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Sold Out</button>
            </form>
+           <%}%>
+
+           <% if (data[i].available === false) { %>
+            <div class="group-button">
+             <form method=POST action="/home/restock/<%= data[i].id%>">
+              <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Restock</button>
+             </form>
+             <%}%>
           <form method=POST action="/home/remove/<%= data[i].id%>">
             <button id="delete-button" type="submit" class="btn btn-outline-dark delete-button" >Delete</button>
           </form>
