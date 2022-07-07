@@ -2,19 +2,23 @@
    display: flex;
   justify-content: center;
    align-items: center;
+   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    min-height: 100vh;
    background: rgb(0,0,0);
    background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(206,206,206,1) 100%);
  }
 
  .itemsPosted {
-   display:flex;
-
+   display: flex;
    width: 80%;
    flex-direction: column;
    justify-content: space-between;
    background-color: lightsteelblue;
+   padding: 15px 15px 15px 15px;
+   margin-top: 100px;
    margin-bottom: 50px;
+   border: solid;
+   border-radius: 12px;
  }
 
  div.itemsPosted:hover {
@@ -85,3 +89,5 @@ div.details{
   #icons i:hover {
     color: rgb(182, 182, 0);
   }
+
+
