@@ -24,9 +24,7 @@
     <% for(let i = 0; i < data.length; i++) { %>
       <card class="itemscard">
       <div class = 'left-info'>
-        <!-- <% if ( !data[i].available) {%>
-          <div><h3><strong>SOLD OUT</strong></h3></div>
-          <%}%> -->
+
 
         <div class='favourite-container'>
         <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
@@ -39,14 +37,28 @@
         </div>
       </div>
       <div class='attribute-description'>
+        <% if(!data[i].available) { %>
+          <div><strong><h3>SOLD OUT</h3></strong></div>
+
+
+        <% } %>
         <div class ='atrributeHeader-description'><strong>Description:</strong></div>
         <span class='attributeValue-description'><%=data[i].description%></span>
         <!-- admin logs in  -->
           <% if (user_id === 1) { %>
+            <% if (data[i].available === true) { %>
           <div class="group-button">
            <form method=POST action="/home/soldout/<%= data[i].id%>">
             <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Sold Out</button>
            </form>
+           <%}%>
+
+           <% if (data[i].available === false) { %>
+            <div class="group-button">
+             <form method=POST action="/home/restock/<%= data[i].id%>">
+              <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Restock</button>
+             </form>
+             <%}%>
           <form method=POST action="/home/remove/<%= data[i].id%>">
             <button type="submit" class="btn btn-outline-dark delete-button">Delete</button>
           </form>
