@@ -51,7 +51,7 @@ module.exports = (db) => {
                 let html = toHtml(item, user_id);
                 html += `
               <form method = "POST" action = "/home/item/remove/${item.id}">
-              <button class="favbutton"> remove from favourites </button>
+              <button class="favbutton"> remove from favorites </button>
               </form></div> </div>
               ` //////add delete item bt and  sold out bt if admin
 
