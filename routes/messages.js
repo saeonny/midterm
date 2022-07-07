@@ -80,11 +80,11 @@ module.exports = (db) => {
         `
         if (req.session.id !== 1) {
           query += `WHERE messages.sender_id = $1 OR messages.sender_id = 1
-          ORDER BY messages.message_data_time DESC`;
+          ORDER BY messages.message_data_time ASC`;
         }
         if(req.session.id === 1) {
           query += `WHERE messages.receiver_id = $1 OR messages.sender_id = 1
-          ORDER BY messages.message_data_time DESC`
+          ORDER BY messages.message_data_time ASC`
 
         }
 
