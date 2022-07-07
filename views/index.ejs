@@ -39,9 +39,6 @@
         </div>
       </div>
       <div class='attribute-description'>
-        <div class='title'>
-          <a href="/home/item//<%= data[i].id%>" class="'title"><strong><%=data[i].title %></strong></a>
-        </div>
         <div class ='atrributeHeader-description'><strong>Description:</strong></div>
         <span class='attributeValue-description'><%=data[i].description%></span>
         <!-- admin logs in  -->
@@ -51,16 +48,18 @@
             <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Sold Out</button>
            </form>
           <form method=POST action="/home/remove/<%= data[i].id%>">
-            <button id="delete-button" type="submit" class="btn btn-outline-dark delete-button" >Delete</button>
+            <button type="submit" class="btn btn-outline-dark delete-button">Delete</button>
           </form>
-
-        </div>
+          </div>
           <%}%>
      </div>
 
     </div>
     <div class='middle-info'>
       <div class ='groupItem-one'>
+      <div class='title'>
+        <a href="/home/item//<%= data[i].id%>" class="'title"><strong><%=data[i].title %></strong></a>
+      </div>
       <div class ='price'><strong>$<%=data[i].price %></strong></div>
     </div>
 
