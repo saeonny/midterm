@@ -12,25 +12,25 @@ module.exports = (db) => {
       html += `
       <card class="messagecard">
       <div class="itemclass">
-      <h5> <strong>Item     :</strong>  ${item.item_title} </h3>
+      <h5> Item     : ${item.item_title} </h3>
       </div>
       <div class="senderclass">
-      <h5> <strong>Sender   :</strong>  ${item.sender} </h3>
+      <h5> Sender   :${item.sender} </h3>
       </div>
       <div class="receiverclass">
-      <h5> <strong>Receiver :</strong>  ${item.receiver} </h3>
+      <h5> Receiver : ${item.receiver} </h3>
       </div>
       <div class="messageclass">
-      <h5> <strong>Message  :</strong>  ${item.message} </h3>
+      <h5> Message  : ${item.message} </h3>
       </div>
       <div class="timeclass">
-      <h5> <strong>Time     :</strong>   ${ item.time}  </h3>
+      <h5> Time     :  ${ item.time}  </h3>
       </div>
       `
       if (item.receiver_id !== 1) {
         html += `<div class="timeclass">
         <form method = "POST" action = "/home/message/${item.item_id}/for/${item.receiver_id}">
-        <button class="messagebutton" > Message  </button>
+        <button> message  </button>
         </form>
         </div>
         </card>`
@@ -38,7 +38,7 @@ module.exports = (db) => {
       else {
         html += `<div class="timeclass">
         <form method = "POST" action = "/home/message/${item.item_id}/for/${item.sender_id}">
-        <button class="messagebutton"> Message  </button>
+        <button> message  </button>
         </form>
         </div>
         </card>`

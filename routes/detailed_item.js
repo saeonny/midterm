@@ -40,7 +40,7 @@ module.exports = (db) => {
                 html += `
               <form method = "POST" action = "/home/item/favourites/${item.id}">
               <button class="favbutton"> add to favourites </button>
-              </form></div></div>`
+              </form></div></div>`   //////add delete item bt and  sold out bt remove contact if admin
                 templateVar.data = html;
                 return res.render('detailed_item', templateVar)
               })
@@ -54,7 +54,7 @@ module.exports = (db) => {
               <form method = "POST" action = "/home/item/remove/${item.id}">
               <button class="favbutton"> remove from favourites </button>
               </form></div> </div>
-              `
+              ` //////add delete item bt and  sold out bt if admin
                 templateVar.data = html;
                 return res.render('detailed_item', templateVar)
               })
@@ -76,6 +76,7 @@ module.exports = (db) => {
         </form>
       </div>
         </div>`
+        //////add delete item bt and  sold out bt if admin
           templateVar.data = html;
           return res.render('detailed_item', templateVar)
         })
@@ -85,8 +86,8 @@ module.exports = (db) => {
   })
 
 
-  //post for contact
-  //post for adding to favorites // if not logined user => redirect to login
+  //post sold out
+  //
 
   router.post("/favourites/:item", (req, res) => {
 
@@ -109,7 +110,7 @@ module.exports = (db) => {
   })
 
   router.post("/remove/:item", (req, res) => {
-    if (!req.session.user_id || req.session.user_id === 1) {
+    if (!req.session.user_id ) {
       return res.redirect("/home/login");
     }
 
@@ -132,15 +133,28 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   })
-
+ //only for users
   router.post("/messages/:item", (req, res) => {
     const item_id = req.params.item
-    res.redirect(`/home/message/send/${item_id}`)
+    const user_id = req.session.user_id
+    if(!req.session.user_id) {
+      res.redirect("/home/login")
+    }
+
+    if(req.session.user_id === 1) {
+      res.redirect(`/home/item/${item_id}`)
+    }
+
+
+    if(req.session.user_id !== 1){
+    res.redirect(`/home/message/send/${item_id}/for/${user_id}`)
+    }
+
   })
 
   const toHtml = function (data) {
     const item = data;
-
+//remove contact for admin, add
     const html =
       `<div class = "detailed_item_card">
   <img class="itemphoto" src=${item.thumbnail_photo_url}>
