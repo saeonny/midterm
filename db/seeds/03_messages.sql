@@ -40,5 +40,5 @@ INSERT INTO messages (sender_id,receiver_id, item_id, message,message_data_time)
  (1,3,1,'great, it is available, it will be $20000','2022-06-21 08:08:54' ),
 
  (5,1,6,'hello i want item 6 :)','2022-06-21 07:33:51' ),
- (1,5,6,'great! that will be $80000','2022-06-21 08:08:54' ),
+ (1,5,6,'great! that will be $80000','2022-06-21 08:08:54' );
 
