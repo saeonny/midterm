@@ -4,24 +4,23 @@
    align-items: center;
    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    min-height: 100vh;
-   background: rgb(0,0,0);
-   background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(206,206,206,1) 100%);
+   background: rgb(206,206,206);
+   background: linear-gradient(90deg, rgba(206,206,206,1) 0%, rgba(0,0,0,0.5732668067226891) 50%, rgba(206,206,206,1) 100%);
+ }
+ .itemscard{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 15px 15px 15px 15px;
+  margin-top: 80px;
+  margin-bottom: 5px;
+  border: solid;
+  border-radius: 12px;
+  background: rgb(174, 238, 213);
+  background: radial-gradient(circle, rgba(174, 238, 213, 1) 0%, rgba(148, 159, 233, 1) 100%);
  }
 
- .itemsPosted {
-   display: flex;
-   width: 80%;
-   flex-direction: column;
-   justify-content: space-between;
-   background-color: lightsteelblue;
-   padding: 15px 15px 15px 15px;
-   margin-top: 100px;
-   margin-bottom: 50px;
-   border: solid;
-   border-radius: 12px;
- }
-
- div.itemsPosted:hover {
+ .itemscard:hover {
   box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.1s;
 }
@@ -34,6 +33,10 @@ div.groupItem-one {
 
 img.photo {
   margin-right: 70px;
+  height: 300px;
+  padding: 10px;
+  border-radius: 20px;
+
 }
 div.car-details {
   display: flex;
@@ -97,6 +100,7 @@ div.details{
     background: none;
     color: white;
   }
+<<<<<<< HEAD
 
 
   .group-button {
@@ -114,3 +118,5 @@ div.details{
 
 }
 
+=======
+>>>>>>> master

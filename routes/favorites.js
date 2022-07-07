@@ -6,7 +6,7 @@ module.exports = (db) => {
 
   router.get("/favorites", (req, res) => {
     ////////////////////////if user is not logined///////////////////////////////////////////
-    if(!req.session.user_id|| req.session.user_id === 1){
+    if(!req.session.user_id){
       return res.redirect("/home/login")
     }
 
