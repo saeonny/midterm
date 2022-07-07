@@ -10,12 +10,22 @@ module.exports = (db) => {
     for(let item of data){
 
       html += `
-      <card >
+      <card class="messagecard">
+      <div class="itemclass">
       <h5> Item     : ${item.item_title} </h3>
+      </div>
+      <div class="senderclass">
       <h5> Sender   :${item.sender} </h3>
+      </div>
+      <div class="receiverclass">
       <h5> Receiver : ${item.receiver} </h3>
+      </div>
+      <div class="messageclass">
       <h5> Message  : ${item.message} </h3>
+      </div>
+      <div class="timeclass">
       <h5> Time     :  ${ item.time}  </h3>
+      </div>
       </card>
        `
 
