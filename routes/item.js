@@ -22,7 +22,7 @@ module.exports = (db) => {
   router.post('/home/favorites/:item_id', (req, res) => {
 
     const user_id = req.session.user_id;
-    const item_id = req.params.item;
+    const item_id = req.params.item_id;
 
     if(!user_id) {
       return res.redirect('/');
