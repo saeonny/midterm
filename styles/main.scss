@@ -9,7 +9,7 @@ body {
 }
 
 .itemscard {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   width: 80%;
   padding: 15px 15px 15px 15px;
@@ -62,7 +62,7 @@ div.left-info {
 
 div.price {
 font-size: 25px;
-margin-left: 900px;
+margin-left: 1000px;
 color: green;
 }
 
