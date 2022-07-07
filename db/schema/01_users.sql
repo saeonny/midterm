@@ -20,7 +20,7 @@ CREATE TABLE items (
   id SERIAL PRIMARY KEY NOT NULL,
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
-  thumbnail_photo_url VARCHAR(255) NOT NULL,
+  thumbnail_photo_url TEXT NOT NULL,
   price INTEGER NOT NULL DEFAULT 0,
   color VARCHAR(255) NOT NULL,
   date_posted TIMESTAMP NOT NULL,
@@ -41,11 +41,12 @@ CREATE TABLE favorites (
 CREATE TABLE messages (
   id SERIAL PRIMARY KEY NOT NULL,
 
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  receiver_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
 
   message VARCHAR(255) NOT NULL,
-  message_data_time TIMESTAMP NOT NULL
+  message_data_time TIMESTAMP WITHOUT TIME ZONE NOT NULL
 
 );
 

@@ -59,6 +59,9 @@ app.use("/api/widgets", widgetsRoutes(db));
 const favourties = require("./routes/favorites")
 app.use( "/home", favourties(db));
 
+///////HOME: Messages//////////
+const message = require("./routes/messages")
+app.use("/home", message(db))
 
 ////////HOME:LOGIN/////////////
 const login = require("./routes/login")
@@ -74,7 +77,7 @@ app.use( "/home/item", item(db));
 
 ////////HOME:NEW ITEM/////////////
 const postitem = require("./routes/post_item")
-app.use( "/home/", postitem(db));
+app.use( "/home", postitem(db));
 
 
 const homepage_item = require("./routes/item");
