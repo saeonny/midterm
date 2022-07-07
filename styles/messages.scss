@@ -26,3 +26,19 @@ body{
 .receiverclass{
   float: right;
 }
+
+.messagebutton{
+  font-size: 16px;
+  border: none;
+  padding: 15px 10px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  border: 2px solid gray;
+  transition-duration: 0.4s;
+}
+.messagebutton:hover {
+  background-color: #008CBA;
+  color: white;
+}
