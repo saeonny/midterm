@@ -63,5 +63,25 @@ module.exports = (db) => {
     });
   });
 
+
+  router.post("/home/soldout/:item", (req, res) =>{
+    const user_id = req.session.user_id;
+    const item_id = req.params.item;
+    const query =
+    `UPDATE items
+     SET available = true
+     WHERE id = $1
+     RETURNING *;`
+    db.query(query, [item_id])
+      .then(data => {
+        res.redirect("/")
+    })
+      .catch(err => {
+        res
+        .status(500)
+        .json({error: err.message})
+    });
+  });
+
   return router;
 }
