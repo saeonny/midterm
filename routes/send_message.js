@@ -122,7 +122,7 @@ const noMessageHtml = function (title, item_id, for_user_id) {
 
   let html = ``;
   html +=
-    `<h2>ITEM : ${title}</h2>
+    `<h2> Item : <a href = "/home/item/${messages[0].item_id}">${messages[0].item_title} </a></h2>
   <div class = "chat-log">
     <h3> no messages yet....<h3>
   </div>
@@ -140,7 +140,7 @@ const noMessageHtml = function (title, item_id, for_user_id) {
 const adminMessagesToHtml = function (messages, item_id, user_id, for_user_id) {
 
   let html = `
-  <h2> Item : ${messages[0].item_title} </h2>
+  <h2> Item : <a href = "/home/item/${messages[0].item_id}">${messages[0].item_title} </a></h2>
   <div class = "chat-log">
   `
   for (let message of messages) {
@@ -182,8 +182,8 @@ const adminMessagesToHtml = function (messages, item_id, user_id, for_user_id) {
 
 const messagesToHtml = function (messages, item_id, user_id, for_user_id) {
   let html = `
-  <h2> Item : ${messages[0].item_title} </h2>
-  <div class = "chat-log">
+  <h2> Item : <a href = "/home/item/${messages[0].item_id}">${messages[0].item_title} </a></h2>
+  <div class = "chat-log">npm
   `
   for (let message of messages) {
     if (message.sender_id === user_id) {

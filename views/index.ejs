@@ -23,6 +23,69 @@
   <div class="group-inside">
   <div class = itemsPosted>
     <% for(let i = 0; i < data.length; i++) { %>
+      <card class="itemscard">
+      <div class = 'left-info'>
+        <div class='favourite-container'>
+        <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
+        <div id="icons">
+          <!-- <a href= home/login alt=“Buy Tickets”> -->
+          <form  method = POST action="/home/favorites/<%= data[i].id %>">
+          <button id='favorite-icon' type = 'submit' class="fa-solid fa-heart">
+          </button>
+          </form>
+        </div>
+      </div>
+      <div class='attribute-description'>
+        <div class='title'>
+          <a href="/home/item//<%= data[i].id%>" class="'title"><strong><%=data[i].title %></strong></a>
+        </div>
+        <% if(!data[i].available) { %>
+          <div><strong><h3>SOLD OUT</h3></strong></div>
+
+
+        <% } %>
+        <div class ='atrributeHeader-description'><strong>Description:</strong></div>
+        <span class='attributeValue-description'><%=data[i].description%></span>
+        <!-- admin logs in  -->
+          <% if (user_id === 1) { %>
+            <% if (data[i].available === true) { %>
+          <div class="group-button">
+           <form method=POST action="/home/soldout/<%= data[i].id%>">
+            <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Sold Out</button>
+           </form>
+           <%}%>
+
+           <% if (data[i].available === false) { %>
+            <div class="group-button">
+             <form method=POST action="/home/restock/<%= data[i].id%>">
+              <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Restock</button>
+             </form>
+             <%}%>
+          <form method=POST action="/home/remove/<%= data[i].id%>">
+            <button id="delete-button" type="submit" class="btn btn-outline-dark delete-button" >Delete</button>
+          </form>
+
+        </div>
+          <%}%>
+     </div>
+
+    </div>
+    <div class='middle-info'>
+      <div class ='groupItem-one'>
+      <div class ='price' float="right"><strong>$<%=data[i].price %></strong></div>
+    </div>
+
+
+   <div class="car-details">
+     <div class='attribute-color'>
+       <div class ='atrributeHeader-color'><strong>Color:</strong></div>
+       <span class='attributeValue-color'> <%=data[i].color%> </span>
+      </div>
+
+      <div class='attribute-model'>
+        <div class ='atrributeHeader-model'><strong>Model:</strong></div>
+        <span class='attributeValue-model'> <%=data[i].model%></span>
+      </div>
 
       <card class="itemscard">
 

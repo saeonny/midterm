@@ -55,7 +55,7 @@ module.exports = (db) => {
     .then((data)=>{
       req.session.user_id = data.rows[0].id
       req.session.user_name = data.rows[0].name
-      return res.redirect("/home/favorites");
+      return res.redirect("/");
 
 
     })

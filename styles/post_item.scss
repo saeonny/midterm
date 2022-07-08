@@ -8,7 +8,8 @@ body {
 }
 
 .newitems{
-  display: inline-block;
+  margin: 0 auto;
+  width: 50%;
   flex-direction: column;
   padding: 10px;
   text-align: center;

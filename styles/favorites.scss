@@ -15,8 +15,8 @@ body{
   font-size: 2em;
   row-gap: 1em;
   border: 60px black;
-
 }
+
 .favorite_card {
   display: inline-block;
   flex-direction: row;
@@ -27,6 +27,7 @@ body{
   background: rgb(174,238,213);
   background: radial-gradient(circle, rgba(174,238,213,1) 0%, rgba(148,159,233,1) 100%);
 }
+
 .photo{
   height: 300px;
   padding: 10px;
@@ -35,7 +36,6 @@ body{
 
 .words{
   padding-top: 70px;  float: right;
-
 }
 
 .buttondelete {
