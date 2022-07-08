@@ -107,6 +107,8 @@ module.exports = (db) => {
             </div>
             </card>
             `
+            templateVar.html = html
+            res.render('messages',templateVar)
           }
 
 
