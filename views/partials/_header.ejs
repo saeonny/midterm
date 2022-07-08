@@ -1,6 +1,8 @@
 <header>
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <nav id="navbarclass" class="navbar fixed-top navbar-expand-md">
 
@@ -15,6 +17,7 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link" href="/home/favorites">My Favourites</a>
           <a class="nav-item nav-link" href="/home/messages">Messages</a>
+
           <% if(user_id === 1) { %>
             <a class="nav-item nav-link" href="/home/postitem">Post New Item</a>
             <%} %>

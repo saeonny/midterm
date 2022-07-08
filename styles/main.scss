@@ -28,7 +28,9 @@ body {
 }
 
 .title {
-font-size: 25px;}
+font-size: 25px;
+margin-left: 475px;
+}
 
 div.groupItem-one {
   display: flex;
@@ -115,4 +117,18 @@ div.details {
 
 #sold-button :focus {
   background-color: transparent;
+}
+
+
+.group-inside {
+  display: flex;
+  margin-top: 5em;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: start;
+  float: right;
+}
+#sort-icon{
+  font-size: 45px;
+  height:60px;
 }
