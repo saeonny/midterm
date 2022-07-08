@@ -89,6 +89,12 @@ const send_message = require("./routes/send_message");
 app.use("/home",send_message(db))
 
 
+//////SEARCH////
+
+const sort = require("./routes/search");
+app.use("/home",sort(db))
+
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).

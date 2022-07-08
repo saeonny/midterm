@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Home Page - Vroom</title>
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/search.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+  </head>
+  <body>
+    <%- include('partials/_header') %>
+    <container class="search" style="display: flex; flex-direction: column; justify-content: center;">
+      <div style="align-items: center;"><form method="POST" action="/home/search" id="filter-form" style="display: flex; flex-direction: column; justify-content: center;">
+        <label>Price (Excludes Taxes)</label>
+        <label>Min</label>
+        <input type="number" name="minPrice" id="min-price"></input>
+        <label>Max</label>
+        <input type="number" name="maxPrice" id="max-price"></input>
+        <button type="submit" value="submit" id="search-submit">Filter</button>
+      </form>
+    </div>
+    <% if (data) { %>
+    <div class = itemsPosted>
+      <% for(let i = 0; i < data.length; i++) { %>
+        <card class="itemscard">
+        <div class = 'left-info'>
+          <div class='favourite-container'>
+          <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
+          <div id="icons">
+            <!-- <a href= home/login alt=“Buy Tickets”> -->
+            <form  method = POST action="/home/favorites/<%= data[i].id %>">
+            <button id='favorite-icon' type = 'submit' class="fa-solid fa-heart">
+            </button>
+            </form>
+          </div>
+        </div>
+        <div class='attribute-description'>
+          <div class ='atrributeHeader-description'><strong>Description:</strong></div>
+          <span class='attributeValue-description'><%=data[i].description%></span>
+          <!-- admin logs in  -->
+            <% if (user_id === 1) { %>
+            <div class="group-button">
+             <form method=POST action="/home/soldout/<%= data[i].id%>">
+              <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Sold Out</button>
+             </form>
+            <form method=POST action="/home/remove/<%= data[i].id%>">
+              <button type="submit" class="btn btn-outline-dark delete-button">Delete</button>
+            </form>
+            </div>
+            <%}%>
+       </div>
+      </div>
+      <div class='middle-info'>
+        <div class ='groupItem-one'>
+        <div class='title'>
+          <a href="/home/item//<%= data[i].id%>" class="'title"><strong><%=data[i].title %></strong></a>
+        </div>
+        <div class ='price'><strong>$<%=data[i].price %></strong></div>
+      </div>
+     <div class="car-details">
+       <div class='attribute-color'>
+         <div class ='atrributeHeader-color'><strong>Color:</strong></div>
+         <span class='attributeValue-color'> <%=data[i].color%> </span>
+        </div>
+        <div class='attribute-model'>
+          <div class ='atrributeHeader-model'><strong>Model:</strong></div>
+          <span class='attributeValue-model'> <%=data[i].model%></span>
+        </div>
+      </div>
+        <div class='attribute-datePosted'>
+          <div class ='atrributeHeader-model'><strong>Date posted:</strong></div>
+          <span class='attributeValue-model'> <%=data[i].date_posted%></span>
+        </div>
+      </div>
+    </card>
+      <%}%>
+    </div>
+    <%}%>
+    </container>
+    </body>
+    </html>

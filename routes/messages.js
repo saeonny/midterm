@@ -1,13 +1,13 @@
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 
 
 
 module.exports = (db) => {
-  const dataToMessageList = function(data) {
+  const dataToMessageList = function (data) {
     let html = ``
-    for(let item of data){
+    for (let item of data) {
 
       html += `
       <card class="messagecard">
@@ -24,7 +24,7 @@ module.exports = (db) => {
       <h5> <strong>Message  :</strong> ${item.message} </h3>
       </div>
       <div class="timeclass">
-      <h5> <strong>Time     :</strong>  ${ item.time}  </h3>
+      <h5> <strong>Time     :</strong>  ${item.time}  </h3>
       </div>
       `
       if (item.receiver_id !== 1) {
@@ -50,52 +50,56 @@ module.exports = (db) => {
 
     return html
   }
-  router.post(`/message/:item_id/for/:for_user_id`,(req,res)=>{
+  router.post(`/message/:item_id/for/:for_user_id`, (req, res) => {
     const item_id = req.params.item_id
     const for_user_id = req.params.for_user_id
     res.redirect(`/home/message/send/${item_id}/for/${for_user_id}`)
   })
 
-   ///list of the messages
+  ///list of the messages
   router.get("/messages", (req, res) => {
-    const templateVar = {user_id : null, user_name :null,message_list : null}
-    if(!req.session.user_id){
+    const templateVar = { user_id: null, user_name: null, message_list: null }
+    console.log(req.session.user_id === 1)
+
+    if (!req.session.user_id) {
       res.send("you should login to use this feature")
     }
 
-    if(req.session.user_id){
+    if (req.session.user_id) {
       templateVar.user_id = req.session.user_id;
       templateVar.user_name = req.session.user_name;
 
       /////if logined user is NOT admin
-      if(req.session.user_id !==0) {
 
-        let query = `
+      let query = `
         SELECT sender.name as sender, sender.id as sender_id, receiver.name as receiver, receiver.id as receiver_id, items.title as item_title,items.id as item_id, messages.message as message, messages.message_data_time  as time
         FROM messages
         LEFT JOIN users as sender ON messages.sender_id = sender.id
         LEFT JOIN users as receiver ON messages.receiver_id = receiver.id
         JOIN items ON messages.item_id = items.id
-
         `
-        if (req.session.id !== 1) {
-          query += `WHERE messages.sender_id = $1 OR messages.sender_id = 1
-          ORDER BY messages.message_data_time ASC`;
-        }
-        if(req.session.id === 1) {
-          query += `WHERE messages.receiver_id = $1 OR messages.sender_id = 1
-          ORDER BY messages.message_data_time ASC`
+      if (req.session.user_id !== 1) {
+        query += `WHERE (messages.sender_id = $1 and messages.receiver_id = 1) OR (messages.sender_id = 1 and messages.receiver_id = $1)
+          ORDER BY messages.message_data_time DESC;`;
+      }
 
-        }
+      if (req.session.user_id === 1) {
+        query += `WHERE messages.receiver_id = $1 OR messages.sender_id = 1
+          ORDER BY messages.message_data_time DESC;`;
 
-        return db.query(query,[req.session.user_id])
-        .then((result)=> {
+
+      }
+
+      return db.query(query, [req.session.user_id])
+        .then((result) => {
           const messages = result.rows;
-          if(messages.length !== 0){
+          console.log(messages)
+          if (messages.length !== 0) {
             const html = dataToMessageList(messages);
             templateVar.message_list = html
-            res.render('messages',templateVar)}
-          if(messages.length === 0) {
+            res.render('messages', templateVar)
+          }
+          if (messages.length === 0) {
             const html = `
             <card class="messagecard">
             <div class="messageclass">
@@ -110,24 +114,24 @@ module.exports = (db) => {
         })
         .catch(err => {
           res
-          .status(500)
-          .json({error: err.message})
-      });
+            .status(500)
+            .json({ error: err.message })
+        });
 
-      }
-
-
-
-
-
-
-
-
-      return res.render("messages",templateVar);
     }
 
 
-  });
+
+
+
+
+
+
+    return res.render("messages", templateVar);
+  }
+
+
+  );
   return router;
 };
 

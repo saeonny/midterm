@@ -21,6 +21,10 @@
 <body>
   <%- include('partials/_header'); %>
   <div class = itemsPosted>
+    <card class="itemscard"><a href="/home/search"  method='GET' action="/home/search">
+      <button id='sort-icon' type ='button' class="fa-solid fa-filter-circle-dollar icon-4x">
+      </button></a> </card>
+
     <% for(let i = 0; i < data.length; i++) { %>
       <card class="itemscard">
       <div class = 'left-info'>

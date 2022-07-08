@@ -12,6 +12,7 @@ const getdataFromDb = (db) => {
   queryString = `
   SELECT *
   FROM items
+  ORDER BY date_posted ASC;
   `;
   return db.query(queryString);
 };
