@@ -117,3 +117,16 @@ div.details{
 
 }
 
+
+.group-inside {
+  display: flex;
+  margin-top: 5em;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: start;
+  float: right;
+}
+#sort-icon{
+  font-size: 45px;
+  height:60px;
+}

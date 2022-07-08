@@ -8,7 +8,7 @@ module.exports = (db) => {
 
     return itemList.getdataFromDb(db)
 
-      .then(data => {
+      .then((data) => {
         const templateVars = {data : data.rows , user_id : null , user_name: null};
         if(req.session.user_id){
           templateVars.user_id = req.session.user_id,
