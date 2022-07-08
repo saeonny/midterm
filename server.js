@@ -88,8 +88,6 @@ app.use( "/", homepage_item(db));
 const send_message = require("./routes/send_message");
 app.use("/home",send_message(db))
 
-const sort = require("./routes/search");
-app.use("/home",sort(db))
 
 //////SEARCH////
 

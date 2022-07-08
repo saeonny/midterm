@@ -33,6 +33,10 @@
         <div class='title'>
           <a href="/home/item//<%= data[i].id%>" class="'title"><strong><%=data[i].title %></strong></a>
         </div>
+        <% if(!data[i].available) { %>
+          <div><strong><h3>SOLD OUT</h3></strong></div>
+        <% } %>
+
         <div class = 'left-info'>
           <div class='favourite-container'>
             <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
@@ -49,15 +53,25 @@
               <span class='attributeValue-description'><%=data[i].description%></span>
               <!-- admin logs in  -->
               <% if (user_id === 1) { %>
+                <% if (data[i].available === true) { %>
+              <div class="group-button">
+               <form method=POST action="/home/soldout/<%= data[i].id%>">
+                <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Sold Out</button>
+               </form>
+               <%}%>
+
+               <% if (data[i].available === false) { %>
                 <div class="group-button">
-                  <form method=POST action="/home/soldout/<%= data[i].id%>">
-                    <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Sold Out</button>
-                  </form>
-                  <form method=POST action="/home/remove/<%= data[i].id%>">
-                    <button type="submit" class="btn btn-outline-dark delete-button">Delete</button>
-                  </form>
-                </div>
-                <%}%>
+                 <form method=POST action="/home/restock/<%= data[i].id%>">
+                  <button id= 'sold-button' type="submit" class="btn btn-outline-danger">Restock</button>
+                 </form>
+                 <%}%>
+              <form method=POST action="/home/remove/<%= data[i].id%>">
+                <button id="delete-button" type="submit" class="btn btn-outline-dark delete-button" >Delete</button>
+              </form>
+
+            </div>
+              <%}%>
               </div>
 
             </div>
@@ -91,12 +105,7 @@
 
         </div>
 
-        <div>
-          <a href="/home/search"  method='GET' action="/home/search">
-          <button id='sort-icon' type ='button' class="fa-solid fa-filter-circle-dollar icon-4x">
-          </button>
 
-        </div>
   </div>
 
    <!-- Bootstrap JS -->
