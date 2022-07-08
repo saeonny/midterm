@@ -100,6 +100,7 @@ module.exports = (db) => {
             res.render('messages', templateVar)
           }
           if (messages.length === 0) {
+
             const html = `
             <card class="messagecard">
             <div class="messageclass">
@@ -108,6 +109,7 @@ module.exports = (db) => {
             </card>
             `
             templateVar.html = html
+            console.log(templateVar.html)
             res.render('messages',templateVar)
           }
 
