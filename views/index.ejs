@@ -26,6 +26,9 @@
 
       <card class="itemscard">
 
+        <div class='title'>
+          <a href="/home/item//<%= data[i].id%>" class="'title"><strong><%=data[i].title %></strong></a>
+        </div>
         <div class = 'left-info'>
           <div class='favourite-container'>
             <img class= 'photo' src = <%= data[i].thumbnail_photo_url %> width = '400' height = '300' alt= 'car-title '>
@@ -56,9 +59,6 @@
             </div>
             <div class='middle-info'>
               <div class ='groupItem-one'>
-                <div class='title'>
-                  <a href="/home/item//<%= data[i].id%>" class="'title"><strong><%=data[i].title %></strong></a>
-                </div>
                 <div class ='price'><strong>$<%=data[i].price %></strong></div>
               </div>
 
