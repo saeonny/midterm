@@ -2,3 +2,36 @@
   margin-top:35px;
 
 }
+
+#filter-form {
+  display: table;
+  text-align: center;
+  // margin-left: 550px;
+  border: solid;
+  border-radius: 12px;
+  background: rgb(174,238,213);
+  background: radial-gradient(circle, rgba(174,238,213,1) 0%, rgba(148,159,233,1) 100%);
+}
+#filter-form:hover{
+  box-shadow: 20px 20px 10px black;
+}
+
+
+#search-submit{
+  display: block;
+  font-size: 16px;
+  border: none;
+  padding: 15px 10px;
+  margin-left: 275px;
+  margin-right: 275px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: white;
+  color: black;
+  border: 2px solid gray;
+  transition-duration: 0.4s;
+}
+#search-submit:hover {
+  background-color: #008CBA;
+  color: white;
+}
